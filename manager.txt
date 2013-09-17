@@ -1,0 +1,43 @@
+Restaurant manager interview
+1. Is an automatic ordering needed? 
+Yes, that would be good. With an option to change it whenever is needed, of course.
+2. Would you also like to have a weekly/ monthly automatic orders?
+Weekly would be good.
+3. How fast should the warehouse order be processed?
+We want to receive supplies the next morning after an order has been placed.
+4. Do you place an order once a day at a specific time or would you like an option of multiple single-orders?
+We want everything to come in one delivery, as it takes time to receive and unpack things.
+5. Would you perhaps like to have an option of adding things to the order within the day, so that it automatically goes out with the everyday big order?
+Yes, that sounds better.
+6. Do you do catering or private buffet-parties?
+Yes, we do that.
+7. Would you like to be able to put in orders in advance for such events to make sure the warehouse can provide you with everything you require?
+It could work, if we place an order beforehand (say, a month prior max), but only confirm it a few days before the event.
+8. Is an inventory database needed to record supply state?
+We usually record these things manually, but I guess that could be an improvement. Yes.
+9. Would you like to keep daily records of supplies (put in supply state at the end of the day) or just a monthly overview?
+I think weekly overview would be most suitable.
+10. Would you like to keep sales history synchronized with the ordering program to see which supplies are used more often and are to be ordered in larger amounts?
+Would that be a separate database?
+11. We could integrate it into the ordering process, so that you can see how much you ordered last week and how much was actually used, so that you could change your order accordingly. 
+Yes, that could be useful.
+12. Are bonuses the same for all the waiters or do they rely on whose shifts earned more?
+We reward all waiters evenly.
+13. So, headwaiters get the same bonus as well?
+No.
+14. Do their bonuses also rely on the monthly income or is it set?
+Headwaiter bonuses are twice the bonus of plain waiters, so yes, they do rely on the income.
+15. Is the percentage of the bonus is set or do you want it to be changeable?
+It would be good to be  able to change it, yes. For all the waiters at once, I mean.
+16. Would you like an option to cut the bonus of a specific waiter manually or using a tracking system, that overviews the incomes during waiter shifts and such?
+We do not want any sort of a complex employee tracking system, as I understand it, but a manual function does sound useful.
+17. So, should it be done right before the salary is assigned, or whenever during the month?
+When salary is assigned should be enough.
+18. Do you issue client ?
+Yes, we do.
+19. Should clients’ bonuses be accessed without a physical card present (by name)?
+Yes. 
+20. Would you like to use the clients’ database for advertising (to annually send advertising to people with registered client cards)?
+Yes. We should have an option to cancel the advertisement mail for clients who choose not to receive them. 
+21. What should your report to the head administration include?
+Income and outcome, statistical data about number of orders and clients. 
