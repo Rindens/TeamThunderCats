@@ -1,0 +1,61 @@
+1) Must clients pay for the order immediately after its entered to the system or can the bill be left open?
+- The bill may be left open.
+
+2) Must an open bill have a limit? 
+- Yes, the limit is 500 euros (if the country has a different currency, then the 500 euro limit is converted into the needed currency).
+
+3) Can the open bill limit depend on the client?
+- No, we like to treat our customers equally.
+
+4) Can the limit be increased if the client is using an accepted credit card?
+- If it would be necessary, the limit should be adjustable.
+
+5) Can the bill be divided into several bills later?
+- Yes.
+
+6)Should waiters be able to hand the bill over to the other waiter?
+- Yes.
+
+7) Should we support credit cards at all? Which credit cards?
+- Yes, the system should be able to support SEB and Swedbank cards.
+
+8) Are there any differences in the mentioned operations between different countries?
+- No.
+
+9) Can the customer pay with a currency that the country doesn't support?
+- No. The customer must pay with the following currency that the country supports.
+
+10) Can the customer demand his/her money back if the ordered goods do not fit the describtion?
+- We would prefer to fix the problem by bringing what the customer asked in the first place. If the customer insists, then we may give them their money back.
+
+11) Must there be a programme that gives an overview of all the orders that have been made that day?
+- Yes it would be easier to keep track of things.
+
+12) Should the graphical interface be conservative or should we focus more on 
+making it modern?
+- The graphical interface may stay simple and conservative.
+
+13) Should the programme save orders inside a textfile every time the programme is closed?
+- There is no need for that.
+
+14) Should the programme also have a feature of deleting an order, if it gets cancelled?
+- Yes, it would keep the confusion to a minimum.
+
+15) Should the programme have a "log in" user system?
+- No, it isn't necessary.
+
+16) Should there be different language choices?
+- Yes, since we work in four different countries.
+
+17) Should there be a programme where waiters could write about customers recent feedback?
+
+- Would be nice to have, but it shouldn't be something very complicated. We would need something fast and easy to use.
+
+18) Should the programme have a "log in" user system?
+- No, it isn't necessary.
+
+19) Should the programme save feedback inside a textfile or delete them when closing the programme?
+- Would be nice if it saved the feedback inside a textfile.
+
+20) Should we make a feature of deleting unneeded feedback from the textfile?
+- No need for that. Every feedback we get is important to us.
