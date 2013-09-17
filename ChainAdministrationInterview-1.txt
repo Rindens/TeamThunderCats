@@ -1,0 +1,45 @@
+1. How many deployments should the final system support?
+- We are planning to expand up to a total of a hundred establishments, so, a 100 deployments so far. We would, however, like the system to be easily expandable if need be.
+2. How many cashier terminals does a restaurant require?
+- Most establishments should have 1 or 2 terminals, but we do plan to have a few major establishments which might require up to 4 or 5 cashier terminals. It will depend on the efficiency of the system. We would prefer to have as little as possible.
+3. Will restaurants have room for a local background machine to control the terminals?
+- Yes, and every restaurant manager should have access to it.
+4. Do your establishments separate cashiers and waiters?
+- We don’t have cashiers. Waiters receive the orders and serve the clients. 
+5. You want to provide bonuses for waiters, depending on the income of a restaurant. Would you prefer to track achievements of every waiter or would you prefer to award the bonuses evenly?
+- Tracking? As in having accounts and records for each employee? Unless it can be done without any cost to the system’s and employee’s performance, I would prefer to just award the bonuses evenly. No tracking required. Accounts make things overly complex.
+6. What are your restaurants supposed to serve aside from beer?  Snacks? Meals?
+- Beer is the main product, obviously, but we couldn’t hold a business on drinks alone. Our menu includes simple snacks that don’t require preparation: nuts, crackers, chips, etc. No hot meals.
+7. Do you require an overview of the entire chain based on the income of separate establishments?
+- Yes, with at least daily updates. If possible, I want it all in real time.
+8. Do want to be able to compare separate establishments? If so, what sort of information would you like to see?
+- Yes, I would like to have all of my restaurants in front of me. First of all – income, obviously. Aside from that I would also like to follow what was ordered and which products are more popular in which establishment. It would also be nice to compare different regions similarly.
+9. Should the menu be universal for all establishments? 
+- While our main products should be available everywhere , we want the specials to be controlled by region. 
+10. Should the prices be universal?
+- No, we need the pricelists to be flexible up to the point of the restaurant manager to be able to change them, within limits and with supplementary reports, but without required immediate approval. 
+11. Do you need some sort of a communication system within the chain? Should it allow personal communication with employees or should it only be feeds?
+- Yes, we want to be able to quickly communicate with the restaurant managers during the working hours. We want to be able to both send news feeds to all the restaurants at once and to contact a specific restaurant manager within the system if such need exists. 
+12. Should the administrative information be available from every terminal, or should it be limited to administrative machines?
+- The cashier terminals should only be able to record order information, billing information and account for all the transactions that happen. The restaurant manager terminals should have access to the information from the cashier terminals within an establishment. And the company administration needs to be able to receive automated daily reports from all of the restaurant manager terminals, and, if need be, have direct access to detailed information about specific transactions.
+13. Does the system have to support bank transfers and credit cards?
+- Yes, obviously. Although we only accept VISA/MasterCard approved credit cards.
+14. Should the bill be paid immediately? Can a bill be split into parts? 
+- A bill should be paid when the client is leaving. We want the billing system as flexible as possible. Until the bill is closed it can as well be separated by the menu entry, each entry into its own bill.
+15. Do you allow clients to have tabs?
+- Trusted regulars should be able to, yes. 
+16. So, you need a system to track your regulars? What information are you going to require?
+- Names, billing information, contact information for advertising and special offers. And their tabs, obviously. It should be tracked by client cards.
+17. Should a cashier be able to personally register a client card? 
+- Cashier should only be able to receive applications for client cards. Restaurant manager should append the application information with the daily report and the client cards are ordered and sent to the establishment once a week for the client to receive. 
+18. Is every client considered to be a regular?
+- Whenever a client uses his card to pay at an establishment, he receives points, depending on the amounts spent. He becomes a regular by getting enough points. Cashiers should have access to this information by swapping a client card and be able to provide services accordingly.
+19. Does a regular’s tab have a limit? Is it the same for all?
+- Yes, tabs are limited. A tab is limited by 10% of what a regular had previously spent in our restaurants. Once that limit is reached, he cannot put any more on the tab, and does not receive the special benefits until he pays the tab in full.
+20. What sorts of special benefits does a client have?
+- Discounts, happy hours, 2 for 1’s, whatever we decide, really. We want to be able to provide variety regarding these things.
+21. How many administrative deployments will you require?
+- At least six for our current main offices, and at least as many for the projected offices in Sweden and Norway. 
+22. Should anything aside from menus and pricelists differ regionally?
+- Yes, client databases should be country-specific for marketing purposes. Aside from that, no, nothing.
+
