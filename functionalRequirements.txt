@@ -1,0 +1,8 @@
+1. A local deployment of the system should include a managing terminal and up to 5 cashier terminals.
+2. The complete system should support simultaneous operation of up to a hundred local deployments.
+3. The system should allow for both local and general expansion if necessary.
+4. The system should not discriminate between users. Separate employee accounts are not required.
+5. Since every region requires a separate menu, the system should support region-based menu databases.
+6. The system must provide an automated communication interface with the administrative servers for daily(real time if possible) activity reports.
+7. The system must provide a two-way user interface for establishment-administration communication.
+8. The administrative interface must be able to provide an overview of the daily activities of the establishments.

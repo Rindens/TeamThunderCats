@@ -3,19 +3,19 @@
 2. How many cashier terminals does a restaurant require?
 - Most establishments should have 1 or 2 terminals, but we do plan to have a few major establishments which might require up to 4 or 5 cashier terminals. It will depend on the efficiency of the system. We would prefer to have as little as possible.
 3. Will restaurants have room for a local background machine to control the terminals?
-- Yes, and every restaurant manager should have access to it.
+- Yes, and every restaurant manager and head waiter should have access to it.
 4. Do your establishments separate cashiers and waiters?
 - We don’t have cashiers. Waiters receive the orders and serve the clients. 
 5. You want to provide bonuses for waiters, depending on the income of a restaurant. Would you prefer to track achievements of every waiter or would you prefer to award the bonuses evenly?
 - Tracking? As in having accounts and records for each employee? Unless it can be done without any cost to the system’s and employee’s performance, I would prefer to just award the bonuses evenly. No tracking required. Accounts make things overly complex.
-6. What are your restaurants supposed to serve aside from beer?  Snacks? Meals?
-- Beer is the main product, obviously, but we couldn’t hold a business on drinks alone. Our menu includes simple snacks that don’t require preparation: nuts, crackers, chips, etc. No hot meals.
+6. What are your restaurants supposed to serve aside from beer? Snacks? Meals?
+- Beer is the main product, obviously, but we couldn’t hold a business on drinks alone. Our menu includes hot meals, and restaurant manager should be able to order appropriate ingredients.
 7. Do you require an overview of the entire chain based on the income of separate establishments?
-- Yes, with at least daily updates. If possible, I want it all in real time.
-8. Do want to be able to compare separate establishments? If so, what sort of information would you like to see?
-- Yes, I would like to have all of my restaurants in front of me. First of all – income, obviously. Aside from that I would also like to follow what was ordered and which products are more popular in which establishment. It would also be nice to compare different regions similarly.
+- Yes, regionally, with at least daily updates. If possible, we would like them all in real time.
+8. Do you want to be able to compare separate establishments? If so, what sort of information would you like to see?
+- Yes, we would like to follow the activities of the restaurants. First of all – income, obviously. Aside from that I would also like to follow what was ordered and which products are more popular in which establishment. It would also be nice to compare different regions in a similar manner.
 9. Should the menu be universal for all establishments? 
-- While our main products should be available everywhere , we want the specials to be controlled by region. 
+- Since we are mostly going to be providing locally available bears, we want the menus including the specials to be controlled by region. 
 10. Should the prices be universal?
 - No, we need the pricelists to be flexible up to the point of the restaurant manager to be able to change them, within limits and with supplementary reports, but without required immediate approval. 
 11. Do you need some sort of a communication system within the chain? Should it allow personal communication with employees or should it only be feeds?
