@@ -41,3 +41,5 @@ Yes.
 Yes. We should have an option to cancel the advertisement mail for clients who choose not to receive them. 
 21. What should your report to the head administration include?
 Income and outcome, statistical data about number of orders and clients. 
+22. Should the reports be sent automativally or manually?
+Automatically every month, manually by request.
