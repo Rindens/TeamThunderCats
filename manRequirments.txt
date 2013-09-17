@@ -1,0 +1,15 @@
++ automatic ordering (daily and weekly)
++ warehouse orders stack within the day, order goes out once a day.
++ option of placing orders beforehand, notifying the warehouse about excess requirments for a specific date.
++ inventory database integrated into the ordering system (statistics about supply order-usage)
++ bonus system, depending on monthly income (set % for waires and double the amount for headwaiters)
+
++ option to cancel specific waiters' bonuses
++ option to change the percentage of the main bonus
++ issue of clien cards
++ access to client discounts and bonuses by name
++ client database with automatic advertisment mail
+
++ statistic of imcome-outcome and client flow
++ automatic report send-outs
++ an option of a single-time manual report send-out
