@@ -17,7 +17,7 @@
 - Yes.
 
 7) Should we support credit cards at all? Which credit cards?
-- Yes, the system should be able to support SEB and Swedbank cards.
+- Yes, the system should be able to support MasterCard/VISA cards.
 
 8) Are there any differences in the mentioned operations between different countries?
 - No.
@@ -28,7 +28,7 @@
 10) Can the customer demand his/her money back if the ordered goods do not fit the describtion?
 - We would prefer to fix the problem by bringing what the customer asked in the first place. If the customer insists, then we may give them their money back.
 
-11) Must there be a programme that gives an overview of all the orders that have been made that day?
+11) Must there be a program that gives an overview of all the orders that have been made that day?
 - Yes it would be easier to keep track of things.
 
 12) Should the graphical interface be conservative or should we focus more on 
