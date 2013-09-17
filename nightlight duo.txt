@@ -1,0 +1,88 @@
+•Head waiter (vahetuse vanem) shall be able to record cash registers initial and end states. 
+
+1. Is there a need to record the state of cash registers during the normal work hours?
+(not just initial and end states)
+
+Yes, that would be much appreciated.
+
+2. Is there also a need to check the credit card payments or just cash payments?
+
+I am in charge of both credit card and cash payments.
+
+3. Should waiters be also able to register cash register initial and end states?
+
+Waiters don't have the authority to do so.
+
+4. Should you (head waiter) also be able to enter and track orders?
+
+No, this is waiter's job.
+
+5. Should you (head waiter) also be able to perform billing and accept payments?
+
+This is the waiter's job also.
+
+6. Is there a need for logging system to keep track of interactions?
+
+Yes, a logging system would be very convinient.
+
+7. Should the graphical user interface be easier to use or should it have more functionalities.
+
+The interface should be user-friendly, to avoid any kind of confusion.
+
+8. How much importance does the graphical user interface design element have?
+
+Looks are important. The interface should look good, but easy on the eyes - not too colourful..
+
+9. Should the program also provide sales history tracking?
+
+Yes, it would give us a good overview of our business.
+
+10. Should we make the graphical user interface more conservative or should we focus more on 
+making it modern?
+
+We focus on tomorrow. We always like to be ahead of others. Even the slightest edge is important,
+thus we would be thankful if it would look modern.
+
+11. Is there a need to provide usage of the program for different head waiters?
+(logging in and logging out)
+
+It is not paramount because right now there is just one head waiter. 
+
+16. Should there be also personalization for every user's graphic user interface?
+
+Yes, i think it would be a splendid idea. The workers would feel more at home then.
+
+17. What kind of customizations should there be then?
+
+Nothing special, choices between different color themes should be enough.
+
+12. What kind of visual feedback should the graphic user interface give?
+
+Quite frankly, i would like the GUI to give some visual feedback after every interaction. 
+Otherwise it would be difficult to know if the program has responded to my command.
+
+13. So the visibility of the system's status is also very important.
+
+Yes indeed. It is always good to have an overview of what exactly is going on.
+
+14. Should the GUI also include some animations?
+
+I think using animation is a very good idea, movement is much more noticeable than stationary images.
+
+18. Is there anything special that needs to be especially attractive to the eye?
+
+I think that displaying help messages in a very noticeable way would be much appreciated.
+
+15. Using color-coded lists is also a popular choice among people using GUI-s. What do you think about it?
+
+In general I approve it but as mentioned above, it should not be too colorful and strain the eyes.
+
+19. Should there be different language choices also?
+
+I think it is a must for a global company so yes, it's necessary.
+
+20. Any final thoughts on what should the program include?
+
+No, I have nothing to add.
+
+
