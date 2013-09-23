@@ -6,3 +6,29 @@
 6. The system must provide an automated communication interface with the administrative servers for daily(real time if possible) activity reports.
 7. The system must provide a two-way user interface for establishment-administration communication.
 8. The administrative interface must be able to provide an overview of the daily activities of the establishments.
+9. A credit card reader.
+10. A cash register for money.
+11. The cash register should be able to print bills.
+12. The option of dividing a bill into several bills.
+13. A system that gives an overview of all the orders that have been made that day
+14. The system should provide different language choices.
+15. The system should have a simple and a conservative interface.
+16. The system should have a feature of deleting an order.
+17. A second system for customers feedback.
+18. The second system should save feedback inside a textfile on close.
+19. The program should include a logging system for keeping track of interactions.
+20. The program should also provide tracking of sales history.
+21. The system should allow the user to personalize the graphic user interface (different color themes as an example)
+22. It is important that the system gives user some visual feedback after every interaction.
+23. The graphic user interface should include some animations.
+24. Noticeable help messages are also very important.
+25. The system should provide different language choices.
+26. It is important to show the system's current status (is the system loading something at the moment as an example)
+27. The program should be able to record cash registers initial and end states.
+28.
+29.
+30.
+31.
+32.
+33.
+34.
