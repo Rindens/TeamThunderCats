@@ -1,5 +1,5 @@
 Restaurant manager interview
-1. Is an automatic ordering needed? 
+1. Is an automated ordering system needed? 
 Yes, that would be good. With an option to change it whenever is needed, of course.
 2. Would you also like to have a weekly/ monthly automatic orders?
 Weekly would be good.
@@ -35,9 +35,9 @@ We do not want any sort of a complex employee tracking system, as I understand i
 When salary is assigned should be enough.
 18. Do you issue client ?
 Yes, we do.
-19. Should clients’ bonuses be accessed without a physical card present (by name)?
+19. Should clientsï¿½ bonuses be accessed without a physical card present (by name)?
 Yes. 
-20. Would you like to use the clients’ database for advertising (to annually send advertising to people with registered client cards)?
+20. Would you like to use the clientsï¿½ database for advertising (to annually send advertising to people with registered client cards)?
 Yes. We should have an option to cancel the advertisement mail for clients who choose not to receive them. 
 21. What should your report to the head administration include?
 Income and outcome, statistical data about number of orders and clients. 
