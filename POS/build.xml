@@ -69,6 +69,18 @@
 			<classpath refid="compile.classpath"/>
 		</javac>
 		
+
+
+	</target>
+	
+	<target name="dist" description="generate the distribution" >
+	    <!-- Create the distribution directory -->
+	    <mkdir dir="${dist.dir}"/>
+
+	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<mkdir dir="${build}"/>
+	    <jar jarfile="${dist.dir}/ThunderCats.jar" basedir="${build}"/>
+		
 		<propertyfile file="version.properties">
 		            <entry key="build.revision.number" type="int" operation="+" value="1"/>
 		        </propertyfile>
@@ -83,16 +95,6 @@
 		        <propertyfile file="version.properties">
 		            <entry key="build.number" value="${new.build.number}"/>
 		        </propertyfile>
-
-	</target>
-	
-	<target name="dist" description="generate the distribution" >
-	    <!-- Create the distribution directory -->
-	    <mkdir dir="${dist.dir}"/>
-
-	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-		<mkdir dir="${build}"/>
-	    <jar jarfile="${dist.dir}/ThunderCats.jar" basedir="${build}"/>
 
 	</target>
 	
