@@ -42,6 +42,7 @@ public class IntroUI extends JPanel {
         	
         	JPanel textPanel = new JPanel(new GridLayout(5,1));  //5 rows, 1 column
         	
+        	JLabel teamLabel = new JLabel(teamLogo); 
         	JLabel team = new JLabel("team: " + properties.getProperty("t"));
 		JLabel teamLeader = new JLabel("lead: " + properties.getProperty("l"));
 		JLabel teamEmail= new JLabel("e-mail: " + properties.getProperty("e"));
@@ -54,7 +55,7 @@ public class IntroUI extends JPanel {
 		textPanel.add(teamMembers);
 		textPanel.add(projectVersion);
 		
-		//add(teamLabel);
+		add(teamLabel);
 		add(textPanel);
 
 	}
