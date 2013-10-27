@@ -18,7 +18,7 @@ public class Intro{
 	private static final Logger log = Logger.getLogger(Intro.class);
 	private static final String MODE = "console";
 
-	private static void createAndShowGUI(SalesDomainController domainController) {
+	/*private static void createAndShowGUI(SalesDomainController domainController) {
 		//Create and set up the window.
 		JFrame frame = new JFrame("Intro team ThunderCats");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,7 @@ public class Intro{
 			e.printStackTrace();
 		}
 		frame.setVisible(false);
-	}
+	}*/
 
 	public static void main(String[] args) {
 		final SalesDomainController domainController = new SalesDomainControllerImpl();
@@ -55,14 +55,36 @@ public class Intro{
 		} else {
 			//Schedule a job for the event dispatch thread:
 			//creating and showing this application's GUI.
-			SwingUtilities.invokeLater(new Runnable() {
+			/*SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					//Turn off metal's use of bold fonts
 					UIManager.put("swing.boldMetal", Boolean.FALSE);
 
 					createAndShowGUI(domainController);
 				}
-			});
+			});*/
+			
+			JFrame frame = new JFrame("Intro team ThunderCats");
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			//Add content to the window.
+			frame.add(new IntroUI());
+
+
+			//Display the window.
+			frame.pack();
+			frame.setVisible(true);
+			frame.setAlwaysOnTop(true);
+			final SalesSystemUI ui = new SalesSystemUI(domainController);
+			ui.setVisible(true);
+
+			frame.setAlwaysOnTop(false);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			frame.setVisible(false);
 		}
 	}
 
