@@ -50,10 +50,10 @@
     </target>
 
     <target name="runc" depends="build" description="Run the application (console)">
-	<java classname="ee.ut.math.tvt.teamthundercats.Intro" classpathref="test.classpath" fork="yes">
-		<arg value="console" />
-	</java>
-</target>
+		<java classname="ee.ut.math.tvt.teamthundercats.Intro" classpathref="test.classpath" fork="yes">
+			<arg value="console" />
+		</java>
+	</target>
 
 	<target name="build" description="Build the system">
 		<mkdir dir="${build.dir}"/>
@@ -117,8 +117,161 @@
 		<delete dir="${build.dir}"/>
 	</target>
 	
+	<!-- Making a commit and pushing the changes -->
+		
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="" />
+		<attribute name="name" default="" />
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
+		
+	
+	<target name="git_commit" description="Making a commit and pushing the changes">
+		<input message="Your comment for commit" addproperty="commit-comment" />
+			
+			
+		<echo message="Commiting all changes with message ${commit-comment}" />
+		<git command="add">
+			<args>
+				<arg value="-A" />
+			</args>
+		</git>
+			
+
+			
+		<git command="commit">
+			<args>
+				<arg value="-m ${commit-comment}" />
+			</args>
+
+		</git>
+			
+			
+			
+		<git command="config">
+			<args>
+				<arg value="--global" />
+				<arg value="push.default" />
+				<arg value="simple" />
+			</args>
+				
+		</git>
+			
+		<git command="remote">
+			<args>
+				<arg value="-v" />
+			</args>
+				
+		</git>
+			
+		<git command="remote">
+			<args>
+				<arg value="remove" />
+				<arg value="origin" />
+			</args>
+				
+		</git>
+			
+		<git command="remote">
+			<args>
+				<arg value="add" />
+				<arg value="origin" />
+				<arg value="https://github.com/Rindens/TeamThunderCats.git" />
+			</args>
+				
+		</git>
+			
+			
+		<git command="push">
+			<args>
+				<arg value="-u" />
+				<arg value="origin" />
+				<arg value="master" />
+			</args>
+				
+		</git>
+				
+			
+	</target>
 	
 	
+	<!-- Creating a tag -->
+	
+	<target name="git_tag" description="Creating a tag">
+		<input message="Tag name" addproperty="tag-name" />
+		
+		
+		<echo message="Tag name is ${tag-name}" />
+		
+		<git command="tag">
+			<args>
+				<arg value="-d" />
+				<arg value="homework_4" />
+			</args>
+		</git>
+		
+		<git command="tag">
+			<args>
+				<arg value="-a" />
+				<arg value="homework_4" />
+				<arg value="-m" />
+				<arg value="${tag-name}" />
+			</args>
+		</git>
+		
+		
+		<git command="config">
+			<args>
+				<arg value="--global" />
+				<arg value="push.default" />
+				<arg value="simple" />
+			</args>
+			
+		</git>
+		
+		<git command="remote">
+			<args>
+				<arg value="-v" />
+			</args>
+			
+		</git>
+		
+		<git command="remote">
+			<args>
+				<arg value="remove" />
+				<arg value="origin" />
+			</args>
+			
+		</git>
+		
+		<git command="remote">
+			<args>
+				<arg value="add" />
+				<arg value="origin" />
+				<arg value="https://github.com/Rindens/TeamThunderCats.git" />
+			</args>
+			
+		</git>
+		
+		
+		<git command="push">
+			<args>
+				<arg value="--tags" />
+			</args>
+			
+		</git>
+			
+		
+	</target>
+
 
 </project>
 
