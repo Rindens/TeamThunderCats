@@ -36,9 +36,6 @@
          Run them from the command line by executing "ant [targetname]"  -->
 
     <target name="run">
-        <propertyfile file="version.properties">
-            <entry key="build.revision.number" type="int" operation="+" value="1"/>
-        </propertyfile>
 
         <loadproperties srcFile="version.properties"/>
 
