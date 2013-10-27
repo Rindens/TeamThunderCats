@@ -1,6 +1,10 @@
 package ee.ut.math.tvt.teamthundercats;
 
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -43,6 +47,12 @@ public class Intro{
 		}
 		frame.setVisible(false);
 	}*/
+	public static void centerWindow(Window frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
+	}
 
 	public static void main(String[] args) {
 		final SalesDomainController domainController = new SalesDomainControllerImpl();
@@ -73,6 +83,7 @@ public class Intro{
 
 			//Display the window.
 			frame.pack();
+			centerWindow(frame);
 			frame.setVisible(true);
 			frame.setAlwaysOnTop(true);
 			final SalesSystemUI ui = new SalesSystemUI(domainController);
@@ -85,6 +96,7 @@ public class Intro{
 				e.printStackTrace();
 			}
 			frame.setVisible(false);
+			centerWindow(frame);
 		}
 	}
 
