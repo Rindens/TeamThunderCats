@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.salessystem.ui.tabs;
+package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
 import java.awt.Component;
 

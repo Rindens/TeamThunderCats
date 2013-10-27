@@ -1,9 +1,9 @@
-package ee.ut.math.tvt.salessystem.ui.tabs;
+package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
-import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
-import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
-import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
-import ee.ut.math.tvt.salessystem.ui.panels.PurchaseItemPanel;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;

@@ -1,10 +1,10 @@
-package ee.ut.math.tvt.salessystem.ui.model;
+package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
 import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 
 /**
  * Stock item table model.

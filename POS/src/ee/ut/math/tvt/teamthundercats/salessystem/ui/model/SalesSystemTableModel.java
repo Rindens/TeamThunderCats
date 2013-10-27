@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.salessystem.ui.model;
+package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 import javax.swing.table.AbstractTableModel;
 
-import ee.ut.math.tvt.salessystem.domain.data.DisplayableItem;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.DisplayableItem;
 
 /**
  * Generic table model implementation suitable for extending.
