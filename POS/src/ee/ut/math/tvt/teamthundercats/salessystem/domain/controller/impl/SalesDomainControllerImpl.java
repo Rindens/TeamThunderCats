@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.teamthundercats.domain.controller.impl;
+package ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.impl;
 
 import java.util.ArrayList;
 import java.util.List;
