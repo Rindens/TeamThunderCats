@@ -321,7 +321,7 @@ public class PurchaseTab {
 			domainController.cancelCurrentPurchase();
 			endSale();
 			model.getCurrentPurchaseTableModel().clear();
-			log.debug("Payment not confirmed");
+			log.debug("Payment cancelled.");
 		} catch (VerificationFailedException e1) {
 			log.error(e1.getMessage());
 		}
