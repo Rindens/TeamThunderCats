@@ -136,9 +136,12 @@
 	
 	<target name="git_commit" description="Making a commit and pushing the changes">
 		<input message="Your comment for commit" addproperty="commit-comment" />
-			
+		<input message="Your username" addproperty="user-name" />
+		<input message="Your password" addproperty="pass-word" />	
 			
 		<echo message="Commiting all changes with message ${commit-comment}" />
+		<echo message="Username is ${user-name}" />
+
 		<git command="add">
 			<args>
 				<arg value="-A" />
@@ -151,7 +154,6 @@
 			<args>
 				<arg value="-m ${commit-comment}" />
 			</args>
-
 		</git>
 			
 			
@@ -162,61 +164,37 @@
 				<arg value="push.default" />
 				<arg value="simple" />
 			</args>
-				
 		</git>
 			
-		<git command="remote">
+
+		<git command="pull">
 			<args>
-				<arg value="-v" />
-			</args>
-				
-		</git>
-			
-		<git command="remote">
-			<args>
-				<arg value="remove" />
-				<arg value="origin" />
-			</args>
-				
-		</git>
-			
-		<git command="remote">
-			<args>
-				<arg value="add" />
-				<arg value="origin" />
 				<arg value="https://github.com/Rindens/TeamThunderCats.git" />
 			</args>
-				
-		</git>
-			
-			
+		</git>	
+		
+		
+		
 		<git command="push">
 			<args>
-				<arg value="-u" />
-				<arg value="origin" />
-				<arg value="master" />
+				<arg value="https://${user-name}:${pass-word}@github.com/Rindens/TeamThunderCats.git" />
 			</args>
-				
 		</git>
 				
 			
-	</target>
+	</target>	
+				
 	
 	
 	<!-- Creating a tag -->
 	
 	<target name="git_tag" description="Creating a tag">
 		<input message="Tag name" addproperty="tag-name" />
-		
+		<input message="Your username" addproperty="user-name" />
+		<input message="Your password" addproperty="pass-word" />	
 		
 		<echo message="Tag name is ${tag-name}" />
-		
-		<git command="tag">
-			<args>
-				<arg value="-d" />
-				<arg value="homework_4" />
-			</args>
-		</git>
+		<echo message="Username is ${user-name}" />
 		
 		<git command="tag">
 			<args>
@@ -237,41 +215,25 @@
 			
 		</git>
 		
-		<git command="remote">
+
+		<git command="pull">
 			<args>
-				<arg value="-v" />
-			</args>
-			
-		</git>
-		
-		<git command="remote">
-			<args>
-				<arg value="remove" />
-				<arg value="origin" />
-			</args>
-			
-		</git>
-		
-		<git command="remote">
-			<args>
-				<arg value="add" />
-				<arg value="origin" />
 				<arg value="https://github.com/Rindens/TeamThunderCats.git" />
 			</args>
-			
-		</git>
+		</git>	
+		
 		
 		
 		<git command="push">
 			<args>
 				<arg value="--tags" />
+				<arg value="https://${user-name}:${pass-word}@github.com/Rindens/TeamThunderCats.git" />
 			</args>
-			
 		</git>
-			
+		
+
 		
 	</target>
-
 
 </project>
 

@@ -1,18 +1,28 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
+import ee.ut.math.tvt.teamthundercats.IntroUI;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
+
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -24,6 +34,8 @@ public class PurchaseTab {
 	private static final Logger log = Logger.getLogger(PurchaseTab.class);
 
 	private final SalesDomainController domainController;
+	
+	private boolean ungoingPaymentConfirmation;
 
 	private JButton newPurchase;
 
@@ -34,6 +46,18 @@ public class PurchaseTab {
 	private PurchaseItemPanel purchasePane;
 
 	private SalesSystemModel model;
+	
+	private JFrame confirmOrderFrame;
+	
+	private double tPrice;
+    private double tPayed;
+    private double tChange;
+		
+    private JTextField totalPrice;
+    private JTextField totalPayed;
+    private JTextField totalChange;
+	private JButton confirmPayment;
+	private JButton cancelPayment;
 
 
 	public PurchaseTab(SalesDomainController controller,
@@ -88,6 +112,8 @@ public class PurchaseTab {
 
 		return panel;
 	}
+	
+	
 
 
 	// Creates the button "New purchase"
@@ -165,26 +191,110 @@ public class PurchaseTab {
 
 	/** Event handler for the <code>submit purchase</code> event. */
 	protected void submitPurchaseButtonClicked() {
-		if(confirmOrder()){
-			log.info("Sale complete");
-			try {
-				log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-				domainController.submitCurrentPurchase(
-						model.getCurrentPurchaseTableModel().getTableRows()
-						);
-				endSale();
-				model.getCurrentPurchaseTableModel().clear();
-			} catch (VerificationFailedException e1) {
-				log.error(e1.getMessage());
+			log.info("Order Confirmed");
+			confirmOrder();
+	}
+	
+	
+
+	
+	protected void confirmOrder(){
+		System.out.println("hi");
+		confirmOrderFrame = new JFrame("Confirm payment");
+		confirmOrderFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(2,1));
+		
+		totalPrice = new JTextField(String.valueOf(tPrice));
+		totalPayed = new JTextField();
+		totalChange = new JTextField();
+		
+        panel.add(new JLabel("Order Price:"));
+        panel.add(totalPrice);
+
+        // - amount
+        panel.add(new JLabel("Payment:"));
+        panel.add(totalPayed);
+
+        // - name
+        panel.add(new JLabel("Change:"));
+        panel.add(totalChange);
+		confirmPayment = createConfirmPaymentButton();
+		cancelPayment = createCancelPaymentButton();
+		confirmPayment.setEnabled(true);
+		cancelPayment.setEnabled(true);
+
+		// Add the buttons to the panel, using GridBagConstraints we defined above
+		panel.add(confirmPayment);
+		panel.add(cancelPayment);
+		//Add content to the window.
+		confirmOrderFrame.add(panel);
+
+		confirmOrderFrame.setSize(300, 300);
+	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	    confirmOrderFrame.setLocation((screen.width - 300) / 2, (screen.height - 300) / 2);
+
+		//Display the window.
+	    confirmOrderFrame.pack();
+	    confirmOrderFrame.setVisible(true);
+	    confirmOrderFrame.setAlwaysOnTop(true);
+	}
+	
+	private JButton createConfirmPaymentButton() {
+		JButton b = new JButton("Confirm payment");
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				confirmPaymentButtonClicked();
 			}
+		});
+		b.setEnabled(false);
+
+		return b;
+	}
+
+
+	// Creates the "Cancel" button
+	private JButton createCancelPaymentButton() {
+		JButton b = new JButton("Cancel payment");
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelPaymentButtonClicked();
+			}
+		});
+		b.setEnabled(false);
+
+		return b;
+	}
+	
+	protected void confirmPaymentButtonClicked() {
+		try {
+			log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
+			domainController.submitCurrentPurchase(
+					model.getCurrentPurchaseTableModel().getTableRows()
+					);
+			endSale();
+			model.getCurrentPurchaseTableModel().clear();
+			log.debug("Payment confirmed");
+			confirmOrderFrame.dispose();
+		} catch (VerificationFailedException e1) {
+			log.error(e1.getMessage());
 		}
 	}
 	
-	protected boolean confirmOrder(){
-		
-		return false;
-		
+	protected void cancelPaymentButtonClicked() {
+		try {
+			domainController.cancelCurrentPurchase();
+			endSale();
+			model.getCurrentPurchaseTableModel().clear();
+			log.debug("Payment not confirmed");
+		} catch (VerificationFailedException e1) {
+			log.error(e1.getMessage());
+		}
+		confirmOrderFrame.dispose();
 	}
+	
+
 
 
 	/* === Helper methods that bring the whole purchase-tab to a certain state
