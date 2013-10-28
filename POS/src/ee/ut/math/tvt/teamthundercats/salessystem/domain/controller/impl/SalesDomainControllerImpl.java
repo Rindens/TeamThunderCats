@@ -1,7 +1,5 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
