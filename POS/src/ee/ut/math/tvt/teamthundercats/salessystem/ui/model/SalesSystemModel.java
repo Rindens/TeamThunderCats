@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
+import javax.swing.table.TableModel;
+
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
@@ -17,7 +19,10 @@ public class SalesSystemModel {
     // Current shopping cart model
     private PurchaseInfoTableModel currentPurchaseTableModel;
 
+
     private final SalesDomainController domainController;
+    
+    
 
     /**
      * Construct application model.
@@ -41,5 +46,6 @@ public class SalesSystemModel {
     public PurchaseInfoTableModel getCurrentPurchaseTableModel() {
         return currentPurchaseTableModel;
     }
+
     
 }

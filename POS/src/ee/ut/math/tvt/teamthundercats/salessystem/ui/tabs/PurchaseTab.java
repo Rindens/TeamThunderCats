@@ -311,7 +311,7 @@ public class PurchaseTab {
 			}
 		} else {
      	       JOptionPane.showMessageDialog(null,
-     	          "Error: Not enough. Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR is not sufficient.", "Error Massage",
+     	          "Error: Not enough. Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR is not sufficient.", "Error Message",
      	          JOptionPane.ERROR_MESSAGE);
 		}
 	}
