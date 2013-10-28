@@ -10,6 +10,7 @@ import javax.swing.JPanel;
  */
 public class HistoryTab {
     
+	public int currentOrderIndex = 0;
     // TODO - implement!
 
     public HistoryTab() {} 

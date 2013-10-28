@@ -14,7 +14,11 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	private static final Logger log = Logger.getLogger(PurchaseInfoTableModel.class);
 	
 	public PurchaseInfoTableModel() {
+<<<<<<< HEAD
 		super(new String[] { "Id", "Name", "Price", "Quantity"});
+=======
+		super(new String[] { "Id", "Name", "Price", "Quantity","Sum"});
+>>>>>>> 0b2f50c98ae04b3148d123c767987d643f081c22
 	}
 
 	@Override
@@ -28,6 +32,11 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			return item.getPrice();
 		case 3:
 			return item.getQuantity();
+<<<<<<< HEAD
+=======
+		case 4:
+			return item.getSum();
+>>>>>>> 0b2f50c98ae04b3148d123c767987d643f081c22
 		}
 		throw new IllegalArgumentException("Column index out of range");
 	}
