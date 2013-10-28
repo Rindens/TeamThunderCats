@@ -1,7 +1,7 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
-import ee.ut.math.tvt.salessystem.domain.data.StockItem;
-import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
