@@ -61,6 +61,58 @@ public class StockTab {
     addItem = new JButton("Add");
     gc.gridwidth = GridBagConstraints.RELATIVE;
     gc.weightx = 1.0;
+    
+      addItem.addActionListener(new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   final JFrame addItemFrame = new JFrame("Add Items");
+    		   //addItemFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		   addItemFrame.setLayout(new GridLayout(2,1));
+    		   
+    		   JPanel panel = new JPanel(new GridLayout(4,2));
+    		   
+    		   final JTextField itemIdField = new JTextField();
+    		   final JTextField itemNameField = new JTextField();
+    		   final JTextField itemPriceField = new JTextField();
+    		   final JTextField itemQuantityField = new JTextField();
+
+    		   panel.add(new JLabel("Id:"));
+    		   panel.add(itemIdField);
+    		   
+    		   panel.add(new JLabel("Name:"));  
+    		   panel.add(itemNameField);
+    		   
+    		   panel.add(new JLabel("Price:"));
+    		   panel.add(itemPriceField);
+    		   
+    		   panel.add(new JLabel("Quantity:"));
+    		   panel.add(itemQuantityField);
+    		   
+    		   JButton saveButton =  new JButton("Save");
+    		   
+    		   saveButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent i) {
+					StockItem newItem =  new StockItem(Long.valueOf(itemIdField.getText()), itemNameField.getText(), "", Double.parseDouble(itemPriceField.getText()), Integer.parseInt(itemQuantityField.getText()));
+					addItemFrame.dispose();
+				}
+    			   
+    		   });
+    		   
+    		   addItemFrame.add(panel);
+    		   addItemFrame.add(saveButton);
+    		   
+    		 //4. Size the frame.
+    		   addItemFrame.pack();
+
+    		 //5. Show it.
+    		   addItemFrame.setVisible(true);
+    		   
+    		   addItemFrame.setVisible(true);
+    	   }
+    	});
+    
     panel.add(addItem, gc);
 
     panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
