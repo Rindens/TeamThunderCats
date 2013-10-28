@@ -20,8 +20,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.apache.log4j.Logger;
 
@@ -34,7 +37,7 @@ public class PurchaseTab {
 	private static final Logger log = Logger.getLogger(PurchaseTab.class);
 
 	private final SalesDomainController domainController;
-	
+
 	private boolean ungoingPaymentConfirmation;
 
 	private JButton newPurchase;
@@ -46,16 +49,16 @@ public class PurchaseTab {
 	private PurchaseItemPanel purchasePane;
 
 	private SalesSystemModel model;
-	
+
 	private JFrame confirmOrderFrame;
-	
+
 	private double tPrice;
-    private double tPayed;
-    private double tChange;
-		
-    private JTextField totalPrice;
-    private JTextField totalPayed;
-    private JTextField totalChange;
+	private double tPayed;
+	private double tChange;
+
+	private JTextField totalPrice;
+	private JTextField totalPayed;
+	private JTextField totalChange;
 	private JButton confirmPayment;
 	private JButton cancelPayment;
 
@@ -112,8 +115,8 @@ public class PurchaseTab {
 
 		return panel;
 	}
-	
-	
+
+
 
 
 	// Creates the button "New purchase"
@@ -191,13 +194,13 @@ public class PurchaseTab {
 
 	/** Event handler for the <code>submit purchase</code> event. */
 	protected void submitPurchaseButtonClicked() {
-			log.info("Order Confirmed");
-			confirmOrder();
+		log.info("Order Confirmed");
+		confirmOrder();
 	}
-	
-	
 
-	
+
+
+
 	protected void confirmOrder(){
 		System.out.println("hi");
 		confirmOrderFrame = new JFrame("Confirm payment");
@@ -205,21 +208,46 @@ public class PurchaseTab {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2,1));
-		
+
+		tPrice = model.getCurrentPurchaseTableModel().getPrice();
+
 		totalPrice = new JTextField(String.valueOf(tPrice));
 		totalPayed = new JTextField();
 		totalChange = new JTextField();
-		
-        panel.add(new JLabel("Order Price:"));
-        panel.add(totalPrice);
 
-        // - amount
-        panel.add(new JLabel("Payment:"));
-        panel.add(totalPayed);
+		totalPrice.setEditable(false);
+		totalChange.setEditable(false);
 
-        // - name
-        panel.add(new JLabel("Change:"));
-        panel.add(totalChange);
+		// - total price
+		panel.add(new JLabel("Order Price:"));
+		panel.add(totalPrice);
+
+		totalPayed.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				warn();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				warn();
+			}
+			public void insertUpdate(DocumentEvent e) {
+				warn();
+			}
+
+			public void warn() {
+				tPayed = Double.parseDouble(totalPayed.getText());
+				tChange = tPayed-tPrice;
+				totalChange.setText(String.valueOf(tChange));
+
+			}
+		});
+
+		// - payment
+		panel.add(new JLabel("Payment:"));
+		panel.add(totalPayed);
+
+		// - change
+		panel.add(new JLabel("Change:"));
+		panel.add(totalChange);
 		confirmPayment = createConfirmPaymentButton();
 		cancelPayment = createCancelPaymentButton();
 		confirmPayment.setEnabled(true);
@@ -232,15 +260,15 @@ public class PurchaseTab {
 		confirmOrderFrame.add(panel);
 
 		confirmOrderFrame.setSize(300, 300);
-	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-	    confirmOrderFrame.setLocation((screen.width - 300) / 2, (screen.height - 300) / 2);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		confirmOrderFrame.setLocation((screen.width - 300) / 2, (screen.height - 300) / 2);
 
 		//Display the window.
-	    confirmOrderFrame.pack();
-	    confirmOrderFrame.setVisible(true);
-	    confirmOrderFrame.setAlwaysOnTop(true);
+		confirmOrderFrame.pack();
+		confirmOrderFrame.setVisible(true);
+		confirmOrderFrame.setAlwaysOnTop(true);
 	}
-	
+
 	private JButton createConfirmPaymentButton() {
 		JButton b = new JButton("Confirm payment");
 		b.addActionListener(new ActionListener() {
@@ -266,22 +294,28 @@ public class PurchaseTab {
 
 		return b;
 	}
-	
+
 	protected void confirmPaymentButtonClicked() {
-		try {
-			log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-			domainController.submitCurrentPurchase(
-					model.getCurrentPurchaseTableModel().getTableRows()
-					);
-			endSale();
-			model.getCurrentPurchaseTableModel().clear();
-			log.debug("Payment confirmed");
-			confirmOrderFrame.dispose();
-		} catch (VerificationFailedException e1) {
-			log.error(e1.getMessage());
+		if(tPayed>=tPrice){
+			try {
+				log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
+				domainController.submitCurrentPurchase(
+						model.getCurrentPurchaseTableModel().getTableRows()
+						);
+				endSale();
+				model.getCurrentPurchaseTableModel().clear();
+				log.debug("Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR confirmed. Change to return: "+tChange+" EUR.");
+				confirmOrderFrame.dispose();
+			} catch (VerificationFailedException e1) {
+				log.error(e1.getMessage());
+			}
+		} else {
+     	       JOptionPane.showMessageDialog(null,
+     	          "Error: Not enough. Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR is not sufficient.", "Error Massage",
+     	          JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	protected void cancelPaymentButtonClicked() {
 		try {
 			domainController.cancelCurrentPurchase();
@@ -293,7 +327,7 @@ public class PurchaseTab {
 		}
 		confirmOrderFrame.dispose();
 	}
-	
+
 
 
 

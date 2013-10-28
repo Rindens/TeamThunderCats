@@ -52,6 +52,16 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		return buffer.toString();
 	}
 	
+	public double getPrice(){
+		double totalPrice=0;
+		
+		for (final SoldItem item : rows) {
+			totalPrice+=item.getPrice()*item.getQuantity();
+		}
+		
+		return totalPrice;
+	}
+	
     /**
      * Add new StockItem to table.
      */
