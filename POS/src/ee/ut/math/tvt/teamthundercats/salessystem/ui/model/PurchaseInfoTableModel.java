@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.SalesSystemUI;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
+
 
 /**
  * Purchase history details model.
@@ -11,7 +13,10 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.SalesSystemUI;
 public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	private static final long serialVersionUID = 1L;
 
+    private PurchaseItemPanel.ComboListener comboListener;
+	
 	private static final Logger log = Logger.getLogger(PurchaseInfoTableModel.class);
+	
 	
 	public PurchaseInfoTableModel() {
 		super(new String[] { "Id", "Name", "Price", "Quantity"});
@@ -75,4 +80,9 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
         log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
         fireTableDataChanged();
     }
+
+	public void setComboListener(PurchaseItemPanel.ComboListener comboListener) {
+		// TODO Auto-generated method stub
+		
+	}
 }
