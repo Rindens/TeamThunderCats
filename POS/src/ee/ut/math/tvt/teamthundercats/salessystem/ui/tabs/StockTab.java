@@ -176,7 +176,7 @@ public class StockTab {
 		panel.add(addItem, gc);
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		return panel;
-	}
+	} 
 
 
 
