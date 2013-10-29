@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
 import java.util.NoSuchElementException;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 
 import org.apache.log4j.Logger;
 
@@ -52,6 +53,19 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		}
 		fireTableDataChanged();
 	}
+	
+	/*public void removeItem(final StockItem currentItem) {
+		try {
+			StockItem item = getItemById(currentItem.getId());
+			item.setQuantity(item.getQuantity() - currentItem.getQuantity());
+			log.debug("Found existing item " + currentItem.getName()
+					+ " decreased quantity by " + currentItem.getQuantity());
+		}
+		catch (NoSuchElementException e) {
+			log.debug("Well this is awkward... No item found in the warehouse.");
+		}
+		fireTableDataChanged();
+	}*/
 
 	@Override
 	public String toString() {

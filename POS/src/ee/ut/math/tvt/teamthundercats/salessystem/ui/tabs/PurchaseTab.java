@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
 import ee.ut.math.tvt.teamthundercats.IntroUI;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
@@ -62,7 +63,9 @@ public class PurchaseTab {
 	private JButton confirmPayment;
 	private JButton cancelPayment;
 
-
+	private int basketSize;
+	
+	
 	public PurchaseTab(SalesDomainController controller,
 			SalesSystemModel model)
 	{
