@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
 
 /**
@@ -33,7 +34,7 @@ public class HistoryTab {
 	
 	private SalesSystemModel model;
     public int currentOrderIndex = 0;
-    public List<List<String>> confirmedSales = new ArrayList<List<String>>();
+    public static List<PurchaseInfoTableModel> confirmedSales = new ArrayList<PurchaseInfoTableModel>();
     // TODO - implement!
 
     public HistoryTab() {} 
@@ -61,8 +62,12 @@ public class HistoryTab {
     
     private Component drawHistoryMainPane() {
 		JPanel tablePanel = new JPanel();
-
-		JTable tableContents = new JTable();
+		JTable tableContents;
+		if(confirmedSales.size()>0){
+			tableContents = new JTable(confirmedSales.get(0));
+		} else {
+			tableContents = new JTable();
+		}
 
 		JTableHeader header = tableContents.getTableHeader();
 		header.setReorderingAllowed(false);

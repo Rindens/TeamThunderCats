@@ -305,8 +305,12 @@ public class PurchaseTab {
 			try {
 				log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
 				domainController.submitCurrentPurchase(
-						model.getCurrentPurchaseTableModel().getTableRows()
-						);
+						model.getCurrentPurchaseTableModel().getTableRows());
+				
+				HistoryTab.confirmedSales.add(model.getCurrentPurchaseTableModel());
+				//
+				System.out.println(HistoryTab.confirmedSales.get(0));
+				//
 				endSale();
 				model.getCurrentPurchaseTableModel().clear();
 				log.debug("Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR confirmed. Change to return: "+tChange+" EUR.");

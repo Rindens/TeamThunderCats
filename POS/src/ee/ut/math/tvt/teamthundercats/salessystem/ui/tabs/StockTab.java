@@ -132,27 +132,6 @@ public class StockTab {
 						StockItem currentItem = new StockItem(Long.valueOf(itemIdField.getText()), itemNameField.getText(), itemTypeField.getText(), Double.parseDouble(itemPriceField.getText()), Integer.parseInt(itemQuantityField.getText()));
 						model.getWarehouseTableModel().addItem(currentItem);
 						log.debug("Added " +itemNameField.getText() + " to warehouse");
-						/*try {
-
-						String content = itemIdField.getText() + ", " + itemNameField.getText() + ", " + "" + ", " + itemPriceField.getText() + ", " + itemQuantityField.getText() + ", ";
-
-						File file = new File("src/warehouseSupplies.txt");
-
-						// if file doesnt exists, then create it
-						if (!file.exists()) {
-							file.createNewFile();
-						}
-
-						FileWriter fw = new FileWriter(file.getAbsoluteFile());
-						BufferedWriter bw = new BufferedWriter(fw);
-						bw.write(content);
-						bw.close();
-
-						System.out.println("Done");
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}*/
 
 						model.getWarehouseTableModel().fireTableDataChanged();
 						draw();
