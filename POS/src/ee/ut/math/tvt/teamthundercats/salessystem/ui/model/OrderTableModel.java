@@ -12,7 +12,7 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
 
 
 /**
- * Purchase history details model.
+ * Purchase history details model. 
  */
 public class OrderTableModel extends SalesSystemTableModel<Order> {
 	private static final long serialVersionUID = 1L;
