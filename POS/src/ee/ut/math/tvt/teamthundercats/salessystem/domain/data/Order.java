@@ -1,13 +1,13 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.domain.data;
 
 import java.util.Date;
-public class Order {
+public class Order implements Cloneable, DisplayableItem {
 	private int orderId;
 	private Date dateTime;
 	private double totalPrice;
 	
 	public Order (int id, double tPrice){
-		this. orderId=id;
+		this.orderId=id;
 		this.dateTime = new Date();
 		this.totalPrice = tPrice;
 		
@@ -35,6 +35,12 @@ public class Order {
 
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
+	}
+
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -49,35 +49,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		dataset.add(chupaChups);
 		dataset.add(frankfurters);
 		dataset.add(beer);
-		/*
-				BufferedReader br;
-		try {
-			br = new BufferedReader(
-			        new InputStreamReader(new FileInputStream("src/warehouseSupplies.txt")));
-			try {
-			    String line;
-			    while ((line = br.readLine()) != null) {
-			    	
-			       String lineArr[] = line.split(", ");
-			       StockItem newItem =  new StockItem(Long.valueOf(lineArr[0]), lineArr[1], lineArr[2], Double.parseDouble(lineArr[3]), Integer.parseInt(lineArr[4]));
-			       dataset.add(newItem);
-			    }
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-			    try {
-					br.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
 		return dataset;
 	}
 }

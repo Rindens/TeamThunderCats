@@ -39,16 +39,8 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
 public class HistoryTab {
     private ListSelectionModel listSelectionModel;
     
-    private boolean isPurchaseWindow;
+    private SalesSystemModel model;
 
-    private String[] columnNames = { "French", "Spanish", "Italian" };
-    private String[][] tableData = {{"un",     "uno",     "uno"     },
-                            {"deux",   "dos",     "due"     },
-                            {"trois",  "tres",    "tre"     },
-                            { "quatre", "cuatro",  "quattro"},
-                            { "cinq",   "cinco",   "cinque" },
-                            { "six",    "seis",    "sei"    },
-                            { "sept",   "siete",   "sette"  } };
 	public int currentOrderIndex = 0;
 	public static List<PurchaseInfoTableModel> confirmedSales = new ArrayList<PurchaseInfoTableModel>();
 
@@ -81,7 +73,7 @@ public class HistoryTab {
 
 		JPanel tablePanel = new JPanel();
         
-		JTable tableContents=  new JTable(tableData, columnNames);
+		JTable tableContents=  new JTable(/*model.getOrderTableModel()*/);
 		listSelectionModel = tableContents.getSelectionModel();
         listSelectionModel.addListSelectionListener(new SharedListSelectionHandler());
         listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
