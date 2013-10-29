@@ -3,6 +3,7 @@ package ee.ut.math.tvt.teamthundercats.salessystem.ui.panels;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.StockTableModel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,7 +45,6 @@ public class PurchaseItemPanel extends JPanel {
 
 	// Warehouse model
 	private SalesSystemModel model;
-
 	/**
 	 * Constructs new purchase item panel.
 	 * 
@@ -190,9 +190,9 @@ public class PurchaseItemPanel extends JPanel {
 		// Add chosen item to the shopping cart.
 		StockItem stockItem = getStockItemByBarcode();
 		//System.out.println(model.getCurrentPurchaseTableModel().getQuantity(stockItem));
+		int originQuantity = model.getCurrentPurchaseTableModel().getQuantity(stockItem);
 		
-		
-			if (Integer.parseInt(quantityField.getText()) > model.getCurrentPurchaseTableModel().getQuantity(stockItem)){
+			if (Integer.parseInt(quantityField.getText()) > originQuantity){
 				JOptionPane.showMessageDialog(null,
 		     	          "Error: Invalid quantity selected. There are only "+stockItem.getQuantity()+" items in stock.", "Error Message",
 		     	          JOptionPane.ERROR_MESSAGE);
@@ -201,7 +201,8 @@ public class PurchaseItemPanel extends JPanel {
 					int quantity;
 					try {
 						quantity = Integer.parseInt(quantityField.getText());
-						stockItem.setQuantity(stockItem.getQuantity()-quantity);
+						originQuantity-=quantity;
+						//stockItem.setQuantity(stockItem.getQuantity()-quantity);
 					} catch (NumberFormatException ex) {
 						quantity = 1;
 					}

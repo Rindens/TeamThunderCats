@@ -5,6 +5,7 @@ import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.StockTableModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
 
 import java.awt.Color;
@@ -65,6 +66,7 @@ public class PurchaseTab {
 
 	private int basketSize;
 	
+	private StockTableModel warehouseState;
 	
 	public PurchaseTab(SalesDomainController controller,
 			SalesSystemModel model)
@@ -175,6 +177,7 @@ public class PurchaseTab {
 		log.info("New sale process started");
 		try {
 			domainController.startNewPurchase();
+			warehouseState= model.getWarehouseTableModel();
 			startNewSale();
 		} catch (VerificationFailedException e1) {
 			log.error(e1.getMessage());
@@ -187,6 +190,7 @@ public class PurchaseTab {
 		log.info("Sale cancelled");
 		try {
 			domainController.cancelCurrentPurchase();
+			model.getWarehouseTableModel().resetState(warehouseState);
 			endSale();
 			model.getCurrentPurchaseTableModel().clear();
 		} catch (VerificationFailedException e1) {
