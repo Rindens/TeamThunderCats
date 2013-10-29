@@ -170,39 +170,14 @@ public class StockTab {
 
 				//5. Show it.
 				addItemFrame.setVisible(true);
-
-				addItemFrame.setVisible(true);
 			}
 		});
 
 		panel.add(addItem, gc);
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		//updateTableData();
 		return panel;
 	}
-	
-	/*private void updateTableData(){
-		tablePanel.removeAll();
-		
-		tableContents = new JTable(model.getWarehouseTableModel());
 
-		JTableHeader header = tableContents.getTableHeader();
-		header.setReorderingAllowed(false);
-
-		JScrollPane scrollPane = new JScrollPane(tableContents);
-
-		GridBagConstraints gc = new GridBagConstraints();
-		GridBagLayout gb = new GridBagLayout();
-		gc.fill = GridBagConstraints.BOTH;
-		gc.weightx = 1.0;
-		gc.weighty = 1.0;
-
-		tablePanel.setLayout(gb);
-		tablePanel.add(scrollPane, gc);
-
-		tablePanel.setBorder(BorderFactory.createTitledBorder("Warehouse status"));
-		
-		}*/
 
 
 	// table of the wareshouse stock
