@@ -1,15 +1,23 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
+import java.util.ArrayList;
+
 import javax.swing.table.TableModel;
 
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.Order;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 
 /**
  * Main model. Holds all the other models.
  */
 public class SalesSystemModel {
+	public int orderId;
+	public ArrayList<ArrayList<SoldItem>> listOfOrderContents = new ArrayList<ArrayList<SoldItem>>();
+	public ArrayList<Order> listOfOrderData = new ArrayList<Order>();
+
     
     private static final Logger log = Logger.getLogger(SalesSystemModel.class);
 
