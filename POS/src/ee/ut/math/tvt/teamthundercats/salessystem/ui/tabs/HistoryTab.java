@@ -37,10 +37,12 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
  * labelled "History" in the menu).
  */
 public class HistoryTab {
-    ListSelectionModel listSelectionModel;
+    private ListSelectionModel listSelectionModel;
+    
+    private boolean isPurchaseWindow;
 
-    String[] columnNames = { "French", "Spanish", "Italian" };
-    String[][] tableData = {{"un",     "uno",     "uno"     },
+    private String[] columnNames = { "French", "Spanish", "Italian" };
+    private String[][] tableData = {{"un",     "uno",     "uno"     },
                             {"deux",   "dos",     "due"     },
                             {"trois",  "tres",    "tre"     },
                             { "quatre", "cuatro",  "quattro"},
@@ -103,8 +105,8 @@ public class HistoryTab {
 		return tablePanel;
 	}
 	protected void outputPurchaseWindow(int index){
-		System.out.println("hi");
-		JFrame purchaseWindow= new JFrame("Confirm payment");
+		
+		JFrame purchaseWindow= new JFrame("Review purchase nr. "+index);
 		purchaseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel smallTablePanel = new JPanel();
