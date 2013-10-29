@@ -213,7 +213,6 @@ public class PurchaseTab {
 		panel.setLayout(new GridLayout(2,1));
 
 		tPrice = model.getCurrentPurchaseTableModel().getPrice();
-
 		totalPrice = new JTextField(String.valueOf(tPrice));
 		totalPayed = new JTextField();
 		totalChange = new JTextField();

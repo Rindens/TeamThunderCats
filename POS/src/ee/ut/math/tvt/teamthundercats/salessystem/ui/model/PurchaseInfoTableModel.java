@@ -1,8 +1,11 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
+import java.util.NoSuchElementException;
+
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.SalesSystemUI;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
 
@@ -19,7 +22,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	
 	
 	public PurchaseInfoTableModel() {
-		super(new String[] { "Id", "Name", "Price", "Quantity"});
+		super(new String[] { "Id", "Name", "Price", "Quantity","Sum"});
 	}
 
 	@Override
@@ -33,6 +36,8 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			return item.getPrice();
 		case 3:
 			return item.getQuantity();
+		case 4:
+			return item.getSum();
 		}
 		throw new IllegalArgumentException("Column index out of range");
 	}
@@ -65,6 +70,14 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		}
 		
 		return totalPrice;
+	}
+	
+
+	public int getQuantity(StockItem item){
+		int totalQuantity=0;
+		totalQuantity = item.getQuantity();
+		
+		return totalQuantity;
 	}
 	
     /**

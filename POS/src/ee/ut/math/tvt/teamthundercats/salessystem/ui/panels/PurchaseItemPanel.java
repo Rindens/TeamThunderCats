@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -188,14 +189,24 @@ public class PurchaseItemPanel extends JPanel {
 	public void addItemEventHandler() {
 		// Add chosen item to the shopping cart.
 		StockItem stockItem = getStockItemByBarcode();
-		if (stockItem != null) {
-			int quantity;
-			try {
-				quantity = Integer.parseInt(quantityField.getText());
-			} catch (NumberFormatException ex) {
-				quantity = 1;
+		//System.out.println(model.getCurrentPurchaseTableModel().getQuantity(stockItem));
+		
+		
+			if (Integer.parseInt(quantityField.getText()) > model.getCurrentPurchaseTableModel().getQuantity(stockItem)){
+				JOptionPane.showMessageDialog(null,
+		     	          "Error: Invalid quantity selected. There are only "+stockItem.getQuantity()+" items in stock.", "Error Message",
+		     	          JOptionPane.ERROR_MESSAGE);
+				} else {
+				if (stockItem != null) {
+					int quantity;
+					try {
+						quantity = Integer.parseInt(quantityField.getText());
+						stockItem.setQuantity(stockItem.getQuantity()-quantity);
+					} catch (NumberFormatException ex) {
+						quantity = 1;
+					}
 			}
-			model.getCurrentPurchaseTableModel().addItem(new SoldItem(stockItem, quantity));
+			model.getCurrentPurchaseTableModel().addItem(new SoldItem(stockItem, Integer.parseInt(quantityField.getText())));
 		}
 	}
 
