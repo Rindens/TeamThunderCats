@@ -20,7 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
+
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.PurchaseInfoTableModel;
@@ -31,16 +37,25 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
  * labelled "History" in the menu).
  */
 public class HistoryTab {
-	
-	private SalesSystemModel model;
-    public int currentOrderIndex = 0;
-    public static List<PurchaseInfoTableModel> confirmedSales = new ArrayList<PurchaseInfoTableModel>();
-    // TODO - implement!
+    ListSelectionModel listSelectionModel;
 
-    public HistoryTab() {} 
-    
-    public Component draw() {
-    	JPanel panel = new JPanel();
+    String[] columnNames = { "French", "Spanish", "Italian" };
+    String[][] tableData = {{"un",     "uno",     "uno"     },
+                            {"deux",   "dos",     "due"     },
+                            {"trois",  "tres",    "tre"     },
+                            { "quatre", "cuatro",  "quattro"},
+                            { "cinq",   "cinco",   "cinque" },
+                            { "six",    "seis",    "sei"    },
+                            { "sept",   "siete",   "sette"  } };
+	public int currentOrderIndex = 0;
+	public static List<PurchaseInfoTableModel> confirmedSales = new ArrayList<PurchaseInfoTableModel>();
+
+	// TODO - implement!
+
+	public HistoryTab() {} 
+
+	public Component draw() {
+		JPanel panel = new JPanel();
 
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints gc = new GridBagConstraints();
@@ -56,18 +71,19 @@ public class HistoryTab {
 		gc.fill = GridBagConstraints.BOTH;
 		panel.add(drawHistoryMainPane(), gc);
 		return panel;
-    }
-    
+	}
 
-    
-    private Component drawHistoryMainPane() {
+
+
+	private Component drawHistoryMainPane() {
+
 		JPanel tablePanel = new JPanel();
-		JTable tableContents;
-		if(confirmedSales.size()>0){
-			tableContents = new JTable(confirmedSales.get(0));
-		} else {
-			tableContents = new JTable();
-		}
+        
+		JTable tableContents=  new JTable(tableData, columnNames);
+		listSelectionModel = tableContents.getSelectionModel();
+        listSelectionModel.addListSelectionListener(new SharedListSelectionHandler());
+        listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableContents.setSelectionModel(listSelectionModel);
 
 		JTableHeader header = tableContents.getTableHeader();
 		header.setReorderingAllowed(false);
@@ -86,4 +102,46 @@ public class HistoryTab {
 		tablePanel.setBorder(BorderFactory.createTitledBorder("Sales history."));
 		return tablePanel;
 	}
+	protected void outputPurchaseWindow(int index){
+		System.out.println("hi");
+		JFrame purchaseWindow= new JFrame("Confirm payment");
+		purchaseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		JPanel smallTablePanel = new JPanel();
+        
+		JTable tableContents=  new JTable(confirmedSales.get(index));
+
+		JTableHeader header = tableContents.getTableHeader();
+		header.setReorderingAllowed(false);
+
+		JScrollPane scrollPane = new JScrollPane(tableContents);
+
+		GridBagConstraints gc = new GridBagConstraints();
+		GridBagLayout gb = new GridBagLayout();
+		gc.fill = GridBagConstraints.BOTH;
+		gc.weightx = 1.0;
+		gc.weighty = 1.0;
+
+		smallTablePanel.setLayout(gb);
+		smallTablePanel.add(scrollPane, gc);
+
+		smallTablePanel.setBorder(BorderFactory.createTitledBorder("Sales history: "+index));
+		
+		purchaseWindow.add(smallTablePanel);
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		purchaseWindow.setLocation((screen.width - 300) / 2, (screen.height - 300) / 2);
+
+		//Display the window.
+		purchaseWindow.pack();
+		purchaseWindow.setVisible(true);
+		purchaseWindow.setAlwaysOnTop(true);
+	}
+	
+	class SharedListSelectionHandler implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) { 
+            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            outputPurchaseWindow(lsm.getMinSelectionIndex());
+        }
+    }
 }
