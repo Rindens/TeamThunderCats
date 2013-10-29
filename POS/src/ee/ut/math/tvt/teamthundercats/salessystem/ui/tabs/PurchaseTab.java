@@ -259,7 +259,6 @@ public class PurchaseTab {
 		//Add content to the window.
 		confirmOrderFrame.add(panel);
 
-		confirmOrderFrame.setSize(300, 300);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		confirmOrderFrame.setLocation((screen.width - 300) / 2, (screen.height - 300) / 2);
 

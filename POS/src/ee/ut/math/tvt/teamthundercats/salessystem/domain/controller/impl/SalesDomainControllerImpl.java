@@ -49,7 +49,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		dataset.add(chupaChups);
 		dataset.add(frankfurters);
 		dataset.add(beer);
-		
+		/*
 				BufferedReader br;
 		try {
 			br = new BufferedReader(
@@ -77,7 +77,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		return dataset;
 	}
 }
