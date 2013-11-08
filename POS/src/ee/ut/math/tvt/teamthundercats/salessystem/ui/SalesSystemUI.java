@@ -34,7 +34,7 @@ public class SalesSystemUI extends JFrame {
   private PurchaseTab purchaseTab;
   private HistoryTab historyTab;
   private StockTab stockTab;
-
+  
   /**
    * Constructs sales system GUI.
    * @param domainController Sales domain controller.
@@ -42,9 +42,11 @@ public class SalesSystemUI extends JFrame {
   public SalesSystemUI(SalesDomainController domainController) {
     this.domainController = domainController;
     this.model = new SalesSystemModel(domainController);
-
+    
+    // JComboBox products = new JComboBox(data.StockItem.getColumn(1));
+    
     // Create singleton instances of the tab classes
-    historyTab = new HistoryTab();
+    historyTab = new HistoryTab(model);
     stockTab = new StockTab(model);
     purchaseTab = new PurchaseTab(domainController, model);
 
@@ -84,7 +86,4 @@ public class SalesSystemUI extends JFrame {
 
     getContentPane().add(tabbedPane);
   }
-
 }
-
-
