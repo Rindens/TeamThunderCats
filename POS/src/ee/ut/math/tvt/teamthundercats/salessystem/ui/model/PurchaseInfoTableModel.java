@@ -99,7 +99,6 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		
 	}
 
-	@Override
 	protected Object getColumnValue(int columnIndex) {
 		// TODO Auto-generated method stub
 		return null;
