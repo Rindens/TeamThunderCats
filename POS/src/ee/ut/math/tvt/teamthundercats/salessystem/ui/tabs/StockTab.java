@@ -144,10 +144,7 @@ public class StockTab {
 				addItemFrame.add(panel);
 				addItemFrame.add(saveButton);
 
-				//4. Size the frame.
 				addItemFrame.pack();
-
-				//5. Show it.
 				addItemFrame.setVisible(true);
 			}
 		});
