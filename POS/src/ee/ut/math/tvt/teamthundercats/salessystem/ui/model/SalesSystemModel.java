@@ -1,6 +1,8 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.table.TableModel;
 
@@ -15,8 +17,8 @@ import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
  */
 public class SalesSystemModel {
 	public int orderId;
-	public ArrayList<ArrayList<SoldItem>> listOfOrderContents = new ArrayList<ArrayList<SoldItem>>();
-	public ArrayList<Order> listOfOrderData = new ArrayList<Order>();
+	
+    public static List<List<String>> confirmedOrders = new ArrayList<List<String>>();
 
     
     private static final Logger log = Logger.getLogger(SalesSystemModel.class);
@@ -27,6 +29,7 @@ public class SalesSystemModel {
     // Current shopping cart model
     private PurchaseInfoTableModel currentPurchaseTableModel;
 
+    public OrderTableModel orderTableModel;
 
     private final SalesDomainController domainController;
     
@@ -41,9 +44,11 @@ public class SalesSystemModel {
         
         warehouseTableModel = new StockTableModel();
         currentPurchaseTableModel = new PurchaseInfoTableModel();
+        orderTableModel = new OrderTableModel();
 
         // populate stock model with data from the warehouse
         warehouseTableModel.populateWithData(domainController.loadWarehouseState());
+        
 
     }
 
@@ -53,6 +58,10 @@ public class SalesSystemModel {
 
     public PurchaseInfoTableModel getCurrentPurchaseTableModel() {
         return currentPurchaseTableModel;
+    }
+    
+    public OrderTableModel getOrderTableModel() {
+        return orderTableModel;
     }
 
     
