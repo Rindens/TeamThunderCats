@@ -2,6 +2,7 @@ package ee.ut.math.tvt.teamthundercats.salessystem.domain.controller;
 
 import java.util.List;
 
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.Order;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
@@ -16,7 +17,7 @@ public interface SalesDomainController {
      * Load the current state of the warehouse.
      * 
      * @return List of ${link
-     *         ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem}s.
+     *         ee.ut.math.tvt.salessystem.domain.data.StockItem}s.
      */
     public List<StockItem> loadWarehouseState();
 
@@ -40,10 +41,19 @@ public interface SalesDomainController {
      * 
      * @param goods
      *            Goods that the buyer has chosen to buy.
+     * @return 
      * @throws VerificationFailedException
      */
     public void submitCurrentPurchase(List<SoldItem> goods)
             throws VerificationFailedException;
-
     
-}
+    /**
+     * Method for adding items to the stock.
+     * 
+     */
+    
+    public void addItemToWarehouse(StockItem item);
+    
+    public Order getCurrentPurchase();
+}	
+
