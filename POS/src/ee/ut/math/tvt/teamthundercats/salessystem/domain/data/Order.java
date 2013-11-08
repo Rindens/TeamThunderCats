@@ -6,7 +6,7 @@ public class Order implements Cloneable, DisplayableItem {
 	private Date dateTime;
 	private double totalPrice;
 	
-	public Order (int id, double tPrice){
+	public Order (int id, Date dateTime, double tPrice){
 		this.orderId=id;
 		this.dateTime = new Date();
 		this.totalPrice = tPrice;
