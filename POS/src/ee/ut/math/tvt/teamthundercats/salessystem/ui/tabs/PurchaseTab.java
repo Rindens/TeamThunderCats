@@ -1,9 +1,12 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
 import ee.ut.math.tvt.teamthundercats.IntroUI;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.Order;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.OrderTableModel;
+import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.StockTableModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.panels.PurchaseItemPanel;
@@ -17,6 +20,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -305,11 +311,20 @@ public class PurchaseTab {
 			try {
 				log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
 				domainController.submitCurrentPurchase(
-						model.getCurrentPurchaseTableModel().getTableRows());
+				model.getCurrentPurchaseTableModel().getTableRows());
 				
-				HistoryTab.confirmedSales.add(model.getCurrentPurchaseTableModel());
+				PurchaseInfoTableModel soldThing = new PurchaseInfoTableModel();
+				soldThing = model.getCurrentPurchaseTableModel();
+				HistoryTab.confirmedSales.add(soldThing);
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				Date date = new Date();
+				int ID = OrderTableModel.getTable().getRowCount();
+				OrderTableModel.getTable().setValueAt(ID, ID, 0);
+				OrderTableModel.getTable().setValueAt(dateFormat.format(date), ID, 1);
+				OrderTableModel.getTable().setValueAt(tPrice, ID, 2);
 				//
-				System.out.println(HistoryTab.confirmedSales.get(0));
+				System.out.println();
 				//
 				endSale();
 				model.getCurrentPurchaseTableModel().clear();
