@@ -84,7 +84,7 @@ public class StockItem implements Cloneable, DisplayableItem {
     }
 
     public String toString() {
-        return id + " " + name + " " + description + " " + price;
+        return name;
     }
 
     /**
@@ -102,11 +102,9 @@ public class StockItem implements Cloneable, DisplayableItem {
         }
     }
     
-    
     public Object clone() {
         StockItem item =
             new StockItem(getId(), getName(), getDescription(), getPrice(), getQuantity());
         return item;
-    }
-		
+    }		
 }
