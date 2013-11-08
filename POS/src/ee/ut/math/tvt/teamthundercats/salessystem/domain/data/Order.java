@@ -1,46 +1,87 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.domain.data;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Order implements Cloneable, DisplayableItem {
-	private int orderId;
-	private Date dateTime;
-	private double totalPrice;
 	
-	public Order (int id, Date dateTime, double tPrice){
-		this.orderId=id;
-		this.dateTime = new Date();
-		this.totalPrice = tPrice;
+	private List<SoldItem> goods;
+	private Double sum;
+	private Date date;
+	private final Long id;
+	
+	public static Long counter = 0L;
+
+	public Order(List<SoldItem> goods){
+		this.goods = goods;
+		this.date = new Date();
+		this.id=counter++;
 		
 	}
 
-	public double getTotalPrice() {
-		return totalPrice;
+	public void refreshStock() {
+		
+		for (SoldItem soldItem : goods) {
+			int amount = soldItem.getQuantity();
+			int stockAmount = soldItem.getStockItem().getQuantity();
+			if(stockAmount-amount>-1){
+				soldItem.getStockItem().setQuantity(stockAmount-amount);
+			} else {
+				//TODO: Throw new exeption?
+			}
+			
+		}
+		
 	}
 
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
+	public Double calculateSum() {
+		Double sum = 0.0;
+		for(SoldItem item : goods){
+			sum+=item.getSum();
+		}
+		this.sum=sum;
+		return sum;
 	}
 
-	public Date getDateTime() {
-		return dateTime;
+	public List<SoldItem> getGoods() {
+		return goods;
 	}
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
+	public void setGoods(List<SoldItem> goods) {
+		this.goods = goods;
+		//refreshStock(goods);
 	}
 
-	public int getOrderId() {
-		return orderId;
+	public Double getSum() {
+		return sum;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setSum(Double sum) {
+		this.sum = sum;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
-
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(" Purchase id: "+id);
+		sb.append(" Products: ");
+		for(SoldItem item : goods){
+			sb.append(item.getName()+"; ");
+		}
+		return sb.toString();
+	}
 }
