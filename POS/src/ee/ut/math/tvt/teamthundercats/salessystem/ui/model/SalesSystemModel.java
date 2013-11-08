@@ -1,25 +1,14 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.swing.table.TableModel;
-
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
-import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.Order;
-import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 
 /**
  * Main model. Holds all the other models.
  */
 public class SalesSystemModel {
-	public int orderId;
-	
-    public static List<List<String>> confirmedOrders = new ArrayList<List<String>>();
-
     
     private static final Logger log = Logger.getLogger(SalesSystemModel.class);
 
@@ -28,12 +17,21 @@ public class SalesSystemModel {
     
     // Current shopping cart model
     private PurchaseInfoTableModel currentPurchaseTableModel;
-
-    public OrderTableModel orderTableModel;
-
-    private final SalesDomainController domainController;
     
-    
+    //History table model
+    private HistoryTableModel historyTableModel;
+    private PurchaseInfoTableModel purchaseHistoryTableModel;
+
+    public PurchaseInfoTableModel getPurchaseHistoryTableModel() {
+		return purchaseHistoryTableModel;
+	}
+
+	public void setPurchaseHistoryTableModel(
+			PurchaseInfoTableModel purchaseHistoryTableModel) {
+		this.purchaseHistoryTableModel = purchaseHistoryTableModel;
+	}
+
+	private final SalesDomainController domainController;
 
     /**
      * Construct application model.
@@ -44,11 +42,11 @@ public class SalesSystemModel {
         
         warehouseTableModel = new StockTableModel();
         currentPurchaseTableModel = new PurchaseInfoTableModel();
-        orderTableModel = new OrderTableModel();
+        historyTableModel =  new HistoryTableModel();
+        purchaseHistoryTableModel = new PurchaseInfoTableModel();
 
         // populate stock model with data from the warehouse
         warehouseTableModel.populateWithData(domainController.loadWarehouseState());
-        
 
     }
 
@@ -60,9 +58,11 @@ public class SalesSystemModel {
         return currentPurchaseTableModel;
     }
     
-    public OrderTableModel getOrderTableModel() {
-        return orderTableModel;
+    public HistoryTableModel getHistoryTableModel(){
+    	return historyTableModel;
     }
-
     
+    public void addItemToWarehouse(StockItem item){
+    	domainController.addItemToWarehouse(item);
+    }
 }
