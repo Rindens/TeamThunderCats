@@ -2,35 +2,23 @@ package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
 
+import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
-import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.OrderTableModel;
-import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.PurchaseInfoTableModel;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
 
 /**
@@ -38,56 +26,68 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
  * labelled "History" in the menu).
  */
 public class HistoryTab {
-    private ListSelectionModel listSelectionModel;
+	private static final Logger log = Logger.getLogger(SalesSystemModel.class);
+	
+	private SalesSystemModel model;
+
+    public HistoryTab(SalesSystemModel model) {
+    	this.model =  model;
+    } 
     
-    private SalesSystemModel model;
+    public Component draw() {
+    	JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-	public int currentOrderIndex = 0;
-	public static List<PurchaseInfoTableModel> confirmedSales = new ArrayList<PurchaseInfoTableModel>();
+        GridBagLayout gb = new GridBagLayout();
+        GridBagConstraints gc = new GridBagConstraints();
+        panel.setLayout(gb);
 
-	// TODO - implement!
+        gc.fill = GridBagConstraints.BOTH;
+        gc.anchor = GridBagConstraints.NORTH;
+        gc.gridwidth = GridBagConstraints.REMAINDER;
+        gc.weightx = 1.0;
+        gc.weighty = 0.4;
+        panel.add(drawHistorykMainPane(), gc);
+        
+        gc.weighty = 0.5;
+        gc.fill = GridBagConstraints.BOTH;
+        panel.add(drawProductsPane(), gc);
+        return panel;
+        
+    }
 
-	public HistoryTab() {} 
-
-	public Component draw() {
+	private Component drawProductsPane() {
 		JPanel panel = new JPanel();
 
-		GridBagLayout gb = new GridBagLayout();
-		GridBagConstraints gc = new GridBagConstraints();
-		panel.setLayout(gb);
+	    JTable table = new JTable(model.getPurchaseHistoryTableModel());
+	    
+	    JTableHeader header = table.getTableHeader();
+	    header.setReorderingAllowed(false);
 
-		gc.fill = GridBagConstraints.HORIZONTAL;
-		gc.anchor = GridBagConstraints.NORTH;
-		gc.gridwidth = GridBagConstraints.REMAINDER;
-		gc.weightx = 1.0d;
-		gc.weighty = 0d;
+	    JScrollPane scrollPane = new JScrollPane(table);
 
-		gc.weighty = 1.0;
-		gc.fill = GridBagConstraints.BOTH;
-		panel.add(drawHistoryMainPane(), gc);
-		return panel;
+	    GridBagConstraints gc = new GridBagConstraints();
+	    GridBagLayout gb = new GridBagLayout();
+	    gc.fill = GridBagConstraints.BOTH;
+	    gc.weightx = 1.0;
+	    gc.weighty = 1.0;
+
+	    panel.setLayout(gb);
+	    panel.add(scrollPane, gc);
+
+	    panel.setBorder(BorderFactory.createTitledBorder("Bought products"));
+	    return panel;
 	}
 
+	private Component drawHistorykMainPane() {
+		JPanel panel = new JPanel();
 
+		final JTable table = new JTable(model.getHistoryTableModel());
 
-	private Component drawHistoryMainPane() {
-
-		JPanel tablePanel = new OrderTableModel();
-		return tablePanel;
-	}
-	protected void outputPurchaseWindow(int index){
-		
-		JFrame purchaseWindow= new JFrame("Review purchase nr. "+index);
-		purchaseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		JPanel smallTablePanel = new JPanel();
-        
-		JTable tableContents=  new JTable(confirmedSales.get(index));
-
-		JTableHeader header = tableContents.getTableHeader();
+		JTableHeader header = table.getTableHeader();
 		header.setReorderingAllowed(false);
 
-		JScrollPane scrollPane = new JScrollPane(tableContents);
+		JScrollPane scrollPane = new JScrollPane(table);
 
 		GridBagConstraints gc = new GridBagConstraints();
 		GridBagLayout gb = new GridBagLayout();
@@ -95,26 +95,32 @@ public class HistoryTab {
 		gc.weightx = 1.0;
 		gc.weighty = 1.0;
 
-		smallTablePanel.setLayout(gb);
-		smallTablePanel.add(scrollPane, gc);
+		panel.setLayout(gb);
+		panel.add(scrollPane, gc);
 
-		smallTablePanel.setBorder(BorderFactory.createTitledBorder("Sales history: "+index));
-		
-		purchaseWindow.add(smallTablePanel);
+		panel.setBorder(BorderFactory.createTitledBorder("Purchase history"));
+		table.setCellSelectionEnabled(true);
 
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		purchaseWindow.setLocation((screen.width - 300) / 2, (screen.height - 300) / 2);
+		ListSelectionModel cellSelectionModel = table.getSelectionModel();
+		cellSelectionModel
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		//Display the window.
-		purchaseWindow.pack();
-		purchaseWindow.setVisible(true);
-		purchaseWindow.setAlwaysOnTop(true);
+		rowClickListener(table, cellSelectionModel);
+		return panel;
 	}
-	
-	class SharedListSelectionHandler implements ListSelectionListener {
-        public void valueChanged(ListSelectionEvent e) { 
-            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-            outputPurchaseWindow(lsm.getMinSelectionIndex());
-        }
-    }
+
+	private void rowClickListener(final JTable table, ListSelectionModel cellSelectionModel) {
+		cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+		  public void valueChanged(ListSelectionEvent e) {
+		    int[] selectedRow = table.getSelectedRows();
+		    if(selectedRow.length>=1){
+		        List<SoldItem> list = model.getHistoryTableModel().getGoodsForSelection(selectedRow);
+		        model.getPurchaseHistoryTableModel().populateWithData(list);
+		        model.getPurchaseHistoryTableModel().fireTableDataChanged();
+			    log.info("selected rows"+Arrays.toString(selectedRow));
+		    }
+		  }
+
+		});
+	}
 }
