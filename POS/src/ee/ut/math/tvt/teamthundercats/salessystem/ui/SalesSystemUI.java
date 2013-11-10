@@ -21,69 +21,70 @@ import org.apache.log4j.Logger;
  */
 public class SalesSystemUI extends JFrame {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  private static final Logger log = Logger.getLogger(SalesSystemUI.class);
+	private static final Logger log = Logger.getLogger(SalesSystemUI.class);
 
-  private final SalesDomainController domainController;
+	private final SalesDomainController domainController;
 
-  // Warehouse model
-  private SalesSystemModel model;
+	// Warehouse model
+	private SalesSystemModel model;
 
-  // Instances of tab classes
-  private PurchaseTab purchaseTab;
-  private HistoryTab historyTab;
-  private StockTab stockTab;
-  
-  /**
-   * Constructs sales system GUI.
-   * @param domainController Sales domain controller.
-   */
-  public SalesSystemUI(SalesDomainController domainController) {
-    this.domainController = domainController;
-    this.model = new SalesSystemModel(domainController);
-    
-    // JComboBox products = new JComboBox(data.StockItem.getColumn(1));
-    
-    // Create singleton instances of the tab classes
-    historyTab = new HistoryTab(model);
-    stockTab = new StockTab(model);
-    purchaseTab = new PurchaseTab(domainController, model);
+	// Instances of tab classes
+	private PurchaseTab purchaseTab;
+	private HistoryTab historyTab;
+	private StockTab stockTab;
 
-    setTitle("Sales system");
+	/**
+	 * Constructs sales system GUI.
+	 * @param domainController Sales domain controller.
+	 */
+	public SalesSystemUI(final SalesDomainController domainController) {
+		this.domainController = domainController;
+		this.model = new SalesSystemModel(domainController);
 
-    // set L&F to the nice Windows style
-    try {
-      UIManager.setLookAndFeel(new WindowsLookAndFeel());
+		// JComboBox products = new JComboBox(data.StockItem.getColumn(1));
 
-    } catch (UnsupportedLookAndFeelException e1) {
-      log.warn(e1.getMessage());
-    }
+		// Create singleton instances of the tab classes
+		historyTab = new HistoryTab(model);
+		stockTab = new StockTab(model);
+		purchaseTab = new PurchaseTab(domainController, model);
 
-    drawWidgets();
+		setTitle("Sales system");
 
-    // size & location
-    int width = 600;
-    int height = 400;
-    setSize(width, height);
-    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    setLocation((screen.width - width) / 2, (screen.height - height) / 2);
+		// set L&F to the nice Windows style
+		try {
+			UIManager.setLookAndFeel(new WindowsLookAndFeel());
 
-    addWindowListener(new WindowAdapter() {
-      @Override
-      public void windowClosing(WindowEvent e) {
-        System.exit(0);
-      }
-    });
-  }
+		} catch (UnsupportedLookAndFeelException e1) {
+			log.warn(e1.getMessage());
+		}
 
-  private void drawWidgets() {
-    JTabbedPane tabbedPane = new JTabbedPane();
+		drawWidgets();
 
-    tabbedPane.add("Point-of-sale", purchaseTab.draw());
-    tabbedPane.add("Warehouse", stockTab.draw());
-    tabbedPane.add("History", historyTab.draw());
+		// size & location
+		int width = 600;
+		int height = 400;
+		setSize(width, height);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setLocation((screen.width - width) / 2, (screen.height - height) / 2);
 
-    getContentPane().add(tabbedPane);
-  }
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				domainController.endSession();
+				System.exit(0);
+			}
+		});
+	}
+
+	private void drawWidgets() {
+		JTabbedPane tabbedPane = new JTabbedPane();
+
+		tabbedPane.add("Point-of-sale", purchaseTab.draw());
+		tabbedPane.add("Warehouse", stockTab.draw());
+		tabbedPane.add("History", historyTab.draw());
+
+		getContentPane().add(tabbedPane);
+	}
 }

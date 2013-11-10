@@ -11,7 +11,6 @@
 	<property name="conf.dir" value="${basedir}/etc" />
 	<property name="doc.dir" value="${build.dir}/doc" />
 	<property name="test.reports.dir" value="${build.dir}/reports/" />
-
 	<property name="lib.dir" value="${basedir}/lib" />
 
 	<!-- database variables -->

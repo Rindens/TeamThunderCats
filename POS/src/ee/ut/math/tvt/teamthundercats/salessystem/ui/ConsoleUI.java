@@ -87,7 +87,7 @@ public class ConsoleUI {
 		System.out.println("w\t\tShow warehouse contents");
 		System.out.println("c\t\tShow cart contents");
 		System.out
-				.println("a IDX NR \tAdd NR of stock item with index IDX to the cart");
+		.println("a IDX NR \tAdd NR of stock item with index IDX to the cart");
 		System.out.println("p\t\tPurchase the shopping cart");
 		System.out.println("r\t\tReset the shopping cart");
 		System.out.println("-------------------------");
@@ -106,18 +106,20 @@ public class ConsoleUI {
 
 		if (c[0].equals("h"))
 			printUsage();
-		else if (c[0].equals("q"))
+		else if (c[0].equals("q")){
+			dc.endSession();
 			System.exit(0);
+		}
 		else if (c[0].equals("w"))
 			showStock(warehouse);
 		else if (c[0].equals("c"))
 			showStock(cart);
 		else if (c[0].equals("p"))
 			try {
-			    List<SoldItem> soldItems = new ArrayList<SoldItem>();
-			    for(StockItem stockItem : cart) {
-			        soldItems.add(new SoldItem(stockItem, stockItem.getQuantity()));
-			    }
+				List<SoldItem> soldItems = new ArrayList<SoldItem>();
+				for(StockItem stockItem : cart) {
+					soldItems.add(new SoldItem(stockItem, stockItem.getQuantity()));
+				}
 				dc.submitCurrentPurchase(soldItems);
 				cart.clear();
 			} catch (VerificationFailedException e) {
@@ -138,5 +140,5 @@ public class ConsoleUI {
 			cart.add(item);
 		}
 	}
-	
+
 }

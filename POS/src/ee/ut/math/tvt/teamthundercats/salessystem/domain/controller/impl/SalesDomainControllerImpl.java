@@ -68,4 +68,10 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		this.dataset.add(item);
 		
 	}
+
+	@Override
+	public void endSession() {
+	    HibernateUtil.closeSession();
+		
+	}
 }

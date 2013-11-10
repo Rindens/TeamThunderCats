@@ -51,7 +51,8 @@ public interface SalesDomainController {
      * Method for adding items to the stock.
      * 
      */
-    
+    public void endSession();
+
     public void addItemToWarehouse(StockItem item);
     
     public Order getCurrentPurchase();
