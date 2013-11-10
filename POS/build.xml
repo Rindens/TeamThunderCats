@@ -3,122 +3,159 @@
 
 	<!-- Definitions of variables used during the rest of this script -->
 
-	<property file="build.properties"/>
-	<property name="build.dir" value="${basedir}/build"/>
-	<property name="build.classes.dir" value="${build.dir}/classes"/>
-	<property name="src.dir" value="${basedir}/src"/>
-	<property name="dist.dir" value="${build.dir}/jar"/>
-	<property name="conf.dir" value="${basedir}/etc"/>
-	<property name="doc.dir" value="${build.dir}/doc"/>
-	<property name="test.reports.dir" value="${build.dir}/reports/"/>
-	
+	<property file="build.properties" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="dist.dir" value="${build.dir}/jar" />
+	<property name="conf.dir" value="${basedir}/etc" />
+	<property name="doc.dir" value="${build.dir}/doc" />
+	<property name="test.reports.dir" value="${build.dir}/reports/" />
+
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<!-- database variables -->
+	<property name="data.dir" value="${basedir}/data" />
+	<property name="db.file" value="${data.dir}/POSdb" />
+	<property name="db.alias" value="POS" />
+	<property name="db.url" value="jdbc:hsqldb:hsql://localhost/POS" />
+	<property name="lib.hibernate.dir" value="${lib.dir}/hibernate" />
+
 
 	<!-- Definitions of classpath variants used for different tasks -->
 
 	<path id="compile.classpath">
 		<fileset dir="lib">
-			<include name="*.jar"/>
+			<include name="*.jar" />
 		</fileset>
 	</path>
 
 	<path id="test.classpath">
-		<pathelement location="${build.classes.dir}"/>
+		<pathelement location="${build.classes.dir}" />
 		<!-- configuration -->
-		<pathelement location="${conf.dir}"/>
+		<pathelement location="${conf.dir}" />
 		<fileset dir="lib">
-			<include name="*.jar"/>
+			<include name="*.jar" />
 		</fileset>
 	</path>
-	
-	
 
-	<!-- Definitions of runnable ant targets.
-         Run them from the command line by executing "ant [targetname]"  -->
+	<path id="run.classpath">
+		<pathelement location="${build.classes.dir}" />
+		<!-- configuration -->
+		<pathelement location="${conf.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
 
-    <target name="run">
+		<fileset dir="${lib.hibernate.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
 
-        <loadproperties srcFile="version.properties"/>
+	<path id="compile.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
 
-        <property 
-            name="new.build.number" 
-            value="${build.major.number}.${build.minor.number}.${build.revision.number}"
-        />
+		<fileset dir="${lib.hibernate.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
 
-        <propertyfile file="version.properties">
-            <entry key="build.number" value="${new.build.number}"/>
-        </propertyfile>
-    </target>
 
-    <target name="runc" depends="build" description="Run the application (console)">
-		<java classname="ee.ut.math.tvt.teamthundercats.Intro" classpathref="test.classpath" fork="yes">
+
+	<!-- Definitions of runnable ant targets. Run them from the command line 
+		by executing "ant [targetname]" -->
+
+	<target name="dbmanager" description="Start the HSQLDB manager">
+		<java classname="org.hsqldb.util.DatabaseManagerSwing"
+			classpathref="run.classpath" fork="yes">
+			<arg line="--user sa --url ${db.url}" />
+		</java>
+	</target>
+
+	<target name="startdb" description="Start the HSQLDB with the default params">
+		<java classname="org.hsqldb.Server" classpathref="run.classpath"
+			fork="yes">
+			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
+		</java>
+	</target>
+
+	<target name="run">
+
+		<loadproperties srcFile="version.properties" />
+
+		<property name="new.build.number"
+			value="${build.major.number}.${build.minor.number}.${build.revision.number}" />
+
+		<propertyfile file="version.properties">
+			<entry key="build.number" value="${new.build.number}" />
+		</propertyfile>
+	</target>
+
+	<target name="runc" depends="build" description="Run the application (console)">
+		<java classname="ee.ut.math.tvt.teamthundercats.Intro"
+			classpathref="test.classpath" fork="yes">
 			<arg value="console" />
 		</java>
 	</target>
 
 	<target name="build" description="Build the system">
-		<mkdir dir="${build.dir}"/>
-		<mkdir dir="${build.classes.dir}"/>
-		<javac
-            srcdir="${src.dir}"
-            destdir="${build.classes.dir}"
-            debug="true"
-            debuglevel="lines,vars,source"
-            encoding="utf-8"
-            compiler="modern"
-            target="1.7"
-            source="1.7"
-			includeantruntime="false">
-			<classpath refid="compile.classpath"/>
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}" debug="true"
+			debuglevel="lines,vars,source" encoding="utf-8" compiler="modern"
+			target="1.7" source="1.7" includeantruntime="false">
+			<classpath refid="compile.classpath" />
 		</javac>
-		
+
 
 
 	</target>
-	
-	<target name="dist" description="generate the distribution" >
-	    <!-- Create the distribution directory -->
-	    <mkdir dir="${dist.dir}"/>
 
-	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-		<mkdir dir="${build}"/>
-	    <jar jarfile="${dist.dir}/ThunderCats.jar" basedir="${build}"/>
-		
+	<target name="dist" description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist.dir}" />
+
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<mkdir dir="${build}" />
+		<jar jarfile="${dist.dir}/ThunderCats.jar" basedir="${build}" />
+
 		<propertyfile file="version.properties">
-		            <entry key="build.revision.number" type="int" operation="+" value="1"/>
-		        </propertyfile>
+			<entry key="build.revision.number" type="int" operation="+"
+				value="1" />
+		</propertyfile>
 
-		        <loadproperties srcFile="version.properties"/>
+		<loadproperties srcFile="version.properties" />
 
-		        <property 
-		            name="new.build.number" 
-		            value="${build.major.number}.${build.minor.number}.${build.revision.number}"
-		        />
+		<property name="new.build.number"
+			value="${build.major.number}.${build.minor.number}.${build.revision.number}" />
 
-		        <propertyfile file="version.properties">
-		            <entry key="build.number" value="${new.build.number}"/>
-		        </propertyfile>
+		<propertyfile file="version.properties">
+			<entry key="build.number" value="${new.build.number}" />
+		</propertyfile>
 
 	</target>
-	
-	
-	
-	
+
+
+
+
 
 	<!-- Build internal documentation -->
 	<target name="javadoc" description="Build internal documentation">
-		<mkdir dir="${doc.dir}"/>
+		<mkdir dir="${doc.dir}" />
 		<javadoc destdir="${doc.dir}" classpathref="compile.classpath">
-			<fileset dir="${src.dir}" includes="**/*.java"/>
+			<fileset dir="${src.dir}" includes="**/*.java" />
 		</javadoc>
 	</target>
 
 	<!-- Clean up build system results -->
 	<target name="clean" description="Clean up build system results">
-		<delete dir="${build.dir}"/>
+		<delete dir="${build.dir}" />
 	</target>
-	
+
 	<!-- Making a commit and pushing the changes -->
-		
+
 	<macrodef name="git">
 		<attribute name="command" />
 		<attribute name="dir" default="" />
@@ -128,17 +165,17 @@
 			<echo message="git @{command}" />
 			<exec executable="git" dir="@{dir}">
 				<arg value="@{command}" />
-				<args/>
+				<args />
 			</exec>
 		</sequential>
 	</macrodef>
-		
-	
+
+
 	<target name="git_commit" description="Making a commit and pushing the changes">
 		<input message="Your comment for commit" addproperty="commit-comment" />
 		<input message="Your username" addproperty="user-name" />
-		<input message="Your password" addproperty="pass-word" />	
-			
+		<input message="Your password" addproperty="pass-word" />
+
 		<echo message="Commiting all changes with message ${commit-comment}" />
 		<echo message="Username is ${user-name}" />
 
@@ -147,17 +184,17 @@
 				<arg value="-A" />
 			</args>
 		</git>
-			
 
-			
+
+
 		<git command="commit">
 			<args>
 				<arg value="-m ${commit-comment}" />
 			</args>
 		</git>
-			
-			
-			
+
+
+
 		<git command="config">
 			<args>
 				<arg value="--global" />
@@ -165,37 +202,38 @@
 				<arg value="simple" />
 			</args>
 		</git>
-			
+
 
 		<git command="pull">
 			<args>
 				<arg value="https://github.com/Rindens/TeamThunderCats.git" />
 			</args>
-		</git>	
-		
-		
-		
+		</git>
+
+
+
 		<git command="push">
 			<args>
-				<arg value="https://${user-name}:${pass-word}@github.com/Rindens/TeamThunderCats.git" />
+				<arg
+					value="https://${user-name}:${pass-word}@github.com/Rindens/TeamThunderCats.git" />
 			</args>
 		</git>
-				
-			
-	</target>	
-				
-	
-	
+
+
+	</target>
+
+
+
 	<!-- Creating a tag -->
-	
+
 	<target name="git_tag" description="Creating a tag">
 		<input message="Tag name" addproperty="tag-name" />
 		<input message="Your username" addproperty="user-name" />
-		<input message="Your password" addproperty="pass-word" />	
-		
+		<input message="Your password" addproperty="pass-word" />
+
 		<echo message="Tag name is ${tag-name}" />
 		<echo message="Username is ${user-name}" />
-		
+
 		<git command="tag">
 			<args>
 				<arg value="-a" />
@@ -204,35 +242,36 @@
 				<arg value="${tag-name}" />
 			</args>
 		</git>
-		
-		
+
+
 		<git command="config">
 			<args>
 				<arg value="--global" />
 				<arg value="push.default" />
 				<arg value="simple" />
 			</args>
-			
+
 		</git>
-		
+
 
 		<git command="pull">
 			<args>
 				<arg value="https://github.com/Rindens/TeamThunderCats.git" />
 			</args>
-		</git>	
-		
-		
-		
+		</git>
+
+
+
 		<git command="push">
 			<args>
 				<arg value="--tags" />
-				<arg value="https://${user-name}:${pass-word}@github.com/Rindens/TeamThunderCats.git" />
+				<arg
+					value="https://${user-name}:${pass-word}@github.com/Rindens/TeamThunderCats.git" />
 			</args>
 		</git>
-		
 
-		
+
+
 	</target>
 
 </project>
