@@ -13,48 +13,54 @@ import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationF
  */
 public interface SalesDomainController {
 
-    /**
-     * Load the current state of the warehouse.
-     * 
-     * @return List of ${link
-     *         ee.ut.math.tvt.salessystem.domain.data.StockItem}s.
-     */
-    public List<StockItem> loadWarehouseState();
+	/**
+	 * Load the current state of the warehouse.
+	 * 
+	 * @return List of ${link
+	 *         ee.ut.math.tvt.salessystem.domain.data.StockItem}s.
+	 */
+	public List<StockItem> loadWarehouseState();
 
-    // business processes
-    /**
-     * Initiate new business transaction - purchase of the goods.
-     * 
-     * @throws VerificationFailedException
-     */
-    public void startNewPurchase() throws VerificationFailedException;
+	// business processes
+	/**
+	 * Initiate new business transaction - purchase of the goods.
+	 * 
+	 * @throws VerificationFailedException
+	 */
+	public void startNewPurchase() throws VerificationFailedException;
 
-    /**
-     * Rollback business transaction - purchase of goods.
-     * 
-     * @throws VerificationFailedException
-     */
-    public void cancelCurrentPurchase() throws VerificationFailedException;
+	/**
+	 * Rollback business transaction - purchase of goods.
+	 * 
+	 * @throws VerificationFailedException
+	 */
+	public void cancelCurrentOrder() throws VerificationFailedException;
 
-    /**
-     * Commit business transaction - purchsae of goods.
-     * 
-     * @param goods
-     *            Goods that the buyer has chosen to buy.
-     * @return 
-     * @throws VerificationFailedException
-     */
-    public void submitCurrentPurchase(List<SoldItem> goods)
-            throws VerificationFailedException;
-    
-    /**
-     * Method for adding items to the stock.
-     * 
-     */
-    public void endSession();
+	/**
+	 * Commit business transaction - purchsae of goods.
+	 * 
+	 * @param goods
+	 *            Goods that the buyer has chosen to buy.
+	 * @return 
+	 * @throws VerificationFailedException
+	 */
+	public void submitCurrentOrder(List<SoldItem> goods)
+			throws VerificationFailedException;
 
-    public void addItemToWarehouse(StockItem item);
-    
-    public Order getCurrentPurchase();
+	/**
+	 * Method for adding items to the stock.
+	 * 
+	 */
+	public void endSession();
+
+	public void addItemToWarehouse(StockItem item);
+
+	public Order getCurrentOrder();
+
+	public List<Order> loadHistoryState();
+
+	public List<SoldItem> getGoodsForOrder(Long selectedRow);
+
+	public void commitCurrentOrder();
 }	
 

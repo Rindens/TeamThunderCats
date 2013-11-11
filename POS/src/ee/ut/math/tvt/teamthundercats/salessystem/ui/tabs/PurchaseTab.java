@@ -179,7 +179,7 @@ public class PurchaseTab {
     log.info("Sale cancelled");
     
     try {
-      domainController.cancelCurrentPurchase();
+      domainController.cancelCurrentOrder();
       endSale();
       model.getCurrentPurchaseTableModel().clear();
     } catch (VerificationFailedException e1) {
@@ -226,16 +226,16 @@ protected void confirmPaymentButtonClicked() {
       if(tPayed>=tPrice){
               try {
                       log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-                      domainController.submitCurrentPurchase(
+                      domainController.submitCurrentOrder(
                       model.getCurrentPurchaseTableModel().getTableRows());
-                      domainController.getCurrentPurchase().calculateSum();
-                      model.getHistoryTableModel().addPurchase(domainController.getCurrentPurchase());
-                      domainController.getCurrentPurchase().refreshStock();
+                      domainController.getCurrentOrder().calculateSum();
+                      model.getHistoryTableModel().addPurchase(domainController.getCurrentOrder());
+                      domainController.getCurrentOrder().refreshStock();
 
                       endSale();
                       model.getCurrentPurchaseTableModel().clear();
                       try {
-                          domainController.cancelCurrentPurchase();
+                          domainController.cancelCurrentOrder();
                   } catch (VerificationFailedException e) {
                           // TODO Auto-generated catch block
                           e.printStackTrace();
@@ -254,7 +254,7 @@ protected void confirmPaymentButtonClicked() {
 
 protected void cancelPaymentButtonClicked() {
       try {
-              domainController.cancelCurrentPurchase();
+              domainController.cancelCurrentOrder();
               endSale();
               model.getCurrentPurchaseTableModel().clear();
               log.debug("Payment cancelled.");

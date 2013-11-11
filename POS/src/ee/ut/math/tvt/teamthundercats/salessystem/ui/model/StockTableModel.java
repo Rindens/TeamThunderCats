@@ -88,12 +88,12 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		return buffer.toString();
 	}
 	
-	public void resetState(StockTableModel previousState){
+	/*public void resetState(StockTableModel previousState){
 		ArrayList <StockItem> previousRows = (ArrayList<StockItem>) previousState.getTableRows();
 		for (final StockItem stockItem : rows) {
 			stockItem.setQuantity(previousRows.get(rows.indexOf(stockItem)).getQuantity());
 		}
-	}
+	}*/
 
 }
  

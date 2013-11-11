@@ -1,22 +1,40 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.domain.data;
 
 import java.util.Date;
+
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "order")
 public class Order implements Cloneable, DisplayableItem {
 	
-	private List<SoldItem> goods;
-	private Double sum;
-	private Date date;
-	private final Long id;
+	@OneToMany(mappedBy = "order")
+    private List<SoldItem> items;
+    
+    @Column(name = "total_price")
+    private Double sum;
+    
+    @Column(name = "date")
+    private Date date;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
 	
 	public static Long counter = 0L;
 
-	public Order(List<SoldItem> goods){
-		this.goods = goods;
+	public Order(List<SoldItem> items){
+		this.items = items;
 		this.date = new Date();
 		this.id=counter++;
 		
@@ -24,35 +42,32 @@ public class Order implements Cloneable, DisplayableItem {
 
 	public void refreshStock() {
 		
-		for (SoldItem soldItem : goods) {
+		for (SoldItem soldItem : items) {
 			int amount = soldItem.getQuantity();
 			int stockAmount = soldItem.getStockItem().getQuantity();
 			if(stockAmount-amount>-1){
 				soldItem.getStockItem().setQuantity(stockAmount-amount);
 			} else {
-				//TODO: Throw new exeption?
 			}
 			
 		}
-		
 	}
 
 	public Double calculateSum() {
 		Double sum = 0.0;
-		for(SoldItem item : goods){
+		for(SoldItem item : items){
 			sum+=item.getSum();
 		}
 		this.sum=sum;
 		return sum;
 	}
 
-	public List<SoldItem> getGoods() {
-		return goods;
+	public List<SoldItem> getItems() {
+		return items;
 	}
 
-	public void setGoods(List<SoldItem> goods) {
-		this.goods = goods;
-		//refreshStock(goods);
+	public void setItems(List<SoldItem> items) {
+		this.items = items;
 	}
 
 	public Double getSum() {
@@ -77,9 +92,9 @@ public class Order implements Cloneable, DisplayableItem {
 	}
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(" Purchase id: "+id);
-		sb.append(" Products: ");
-		for(SoldItem item : goods){
+		sb.append(" Order id: "+id);
+		sb.append(" Items of an order: ");
+		for(SoldItem item : items){
 			sb.append(item.getName()+"; ");
 		}
 		return sb.toString();

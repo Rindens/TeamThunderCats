@@ -40,7 +40,7 @@ public class HistoryTableModel extends SalesSystemTableModel<Order>{
 	public  java.util.List<SoldItem> getGoodsForSelection(int[] selectedRow) {
 		for(int i : selectedRow){
 			if(getItemById(i)!= null){
-				return getItemById(i).getGoods();
+				return getItemById(i).getItems();
 			}
 		}
 		return null;

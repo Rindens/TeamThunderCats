@@ -120,14 +120,14 @@ public class ConsoleUI {
 				for(StockItem stockItem : cart) {
 					soldItems.add(new SoldItem(stockItem, stockItem.getQuantity()));
 				}
-				dc.submitCurrentPurchase(soldItems);
+				dc.submitCurrentOrder(soldItems);
 				cart.clear();
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());
 			}
 		else if (c[0].equals("r")) 
 			try {
-				dc.cancelCurrentPurchase();
+				dc.cancelCurrentOrder();
 				cart.clear();
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());

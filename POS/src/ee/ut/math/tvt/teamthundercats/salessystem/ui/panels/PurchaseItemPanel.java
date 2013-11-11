@@ -8,6 +8,7 @@ import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.StockTableModel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -19,6 +20,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -186,31 +188,57 @@ public class PurchaseItemPanel extends JPanel {
 	/**
 	 * Add new item to the cart.
 	 */
+
+/*
 	public void addItemEventHandler() {
 		// Add chosen item to the shopping cart.
 		StockItem stockItem = getStockItemByBarcode();
 		//System.out.println(model.getCurrentPurchaseTableModel().getQuantity(stockItem));
 		int originQuantity = model.getCurrentPurchaseTableModel().getQuantity(stockItem);
-		
-			if (Integer.parseInt(quantityField.getText()) > originQuantity){
-				JOptionPane.showMessageDialog(null,
-		     	          "Error: Invalid quantity selected. There are only "+stockItem.getQuantity()+" items in stock.", "Error Message",
-		     	          JOptionPane.ERROR_MESSAGE);
-				} else {
-				if (stockItem != null) {
-					int quantity;
-					try {
-						quantity = Integer.parseInt(quantityField.getText());
-						originQuantity-=quantity;
-						//stockItem.setQuantity(stockItem.getQuantity()-quantity);
-					} catch (NumberFormatException ex) {
-						quantity = 1;
-					}
-			}
-			model.getCurrentPurchaseTableModel().addItem(new SoldItem(stockItem, Integer.parseInt(quantityField.getText())));
-		}
-	}
+		int cartItemQuantity = Integer.parseInt(quantityField.getText());
+		System.out.println(originQuantity);
+		if (cartItemQuantity > stockItem.getQuantity()){
+			JOptionPane.showMessageDialog(null,
+					"Error: Invalid quantity selected. There are only "+stockItem.getQuantity()+" items in stock.", "Error Message",
+					JOptionPane.ERROR_MESSAGE);
+		} else {
+			model.getCurrentPurchaseTableModel().addItem(new SoldItem(stockItem, cartItemQuantity));		}
+	}*/
+    public void addItemEventHandler() {
+        // add chosen item to the shopping cart.
+        Integer quantity = validateQuantity();
+        if(quantity!=null){
+                int id = Integer.parseInt(barCodeField.getText());
+                
+                StockItem item = model.getWarehouseTableModel().getItemById(id);
+                model.getCurrentPurchaseTableModel()
+                .addItem(new SoldItem(item, quantity));
+        }else{
+                JOptionPane.showMessageDialog(null, "Unable to add product by selected criterias. \n Are you sure you selected a product?", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
 
+    private Integer validateQuantity() {
+        int quantity=-1;
+        try{
+                 quantity = Integer.valueOf(quantityField.getText());
+        } catch (NumberFormatException e){
+                quantityField.setBackground(SystemColor.RED);
+                return null;
+        }
+        if(quantity<1){
+                quantityField.setBackground(SystemColor.RED);
+                return null;
+        }
+        if(barCodeField.getText().isEmpty() || priceField.getText().isEmpty()){
+                return null;
+        }
+        quantityField.setBackground(SystemColor.WHITE);
+                return quantity;
+                
+        }
 	public class ComboListener implements ActionListener{
 
 		@Override
