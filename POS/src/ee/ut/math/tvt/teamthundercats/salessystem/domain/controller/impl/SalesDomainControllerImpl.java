@@ -20,8 +20,8 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	private List<StockItem> dataset = new ArrayList<StockItem>();
 	private List<Order> orders =  new ArrayList<Order>();
-
 	private Order currentOrder;
+
 	private Session session = HibernateUtil.currentSession();
 
 	public Order getcurrentOrder() {
@@ -98,7 +98,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	}
 
 	@Override
-	public List<SoldItem> getGoodsForOrder(Long id) {
+	public List<SoldItem> getItemsForOrder(Long id) {
 		if(orders!=null){
 			Order order = (Order) session.get(Order.class, id);
 			return order.getItems();

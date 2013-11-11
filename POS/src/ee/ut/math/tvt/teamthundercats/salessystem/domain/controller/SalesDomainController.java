@@ -7,6 +7,7 @@ import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.exception.VerificationFailedException;
 
+
 /**
  * Sales domain controller is responsible for the domain specific business
  * processes.
@@ -59,7 +60,7 @@ public interface SalesDomainController {
 
 	public List<Order> loadHistoryState();
 
-	public List<SoldItem> getGoodsForOrder(Long selectedRow);
+	public List<SoldItem> getItemsForOrder(Long selectedRow);
 
 	public void commitCurrentOrder();
 }	
