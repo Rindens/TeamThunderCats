@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="lib/hibernate/jboss-logging-3.1.0.GA.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
