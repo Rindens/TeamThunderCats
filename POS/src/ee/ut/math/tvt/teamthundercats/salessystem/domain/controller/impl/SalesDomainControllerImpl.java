@@ -93,8 +93,12 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	@Override
 	public List<Order> loadHistoryState() {
-		// TODO Auto-generated method stub
-		return null;
+		if(!orders.isEmpty()){
+			return orders;
+		}
+		List<Order> listOfPurchases =  session.createCriteria(Order.class).list();
+		orders.addAll(listOfPurchases);
+		return orders;
 	}
 
 	@Override
