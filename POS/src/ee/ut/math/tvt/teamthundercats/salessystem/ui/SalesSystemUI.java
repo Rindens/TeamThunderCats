@@ -43,8 +43,6 @@ public class SalesSystemUI extends JFrame {
 		this.domainController = domainController;
 		this.model = new SalesSystemModel(domainController);
 
-		// JComboBox products = new JComboBox(data.StockItem.getColumn(1));
-
 		// Create singleton instances of the tab classes
 		historyTab = new HistoryTab(model);
 		stockTab = new StockTab(model);

@@ -88,19 +88,48 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
          * XXX In case such stockItem already exists increase the quantity of the
          * existing stock.
          */
-        
-        rows.add(item);
-        log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
-        fireTableDataChanged();
+    	SoldItem currentItem =  getItemInstance(item);		
+		if (currentItem != null) {
+
+			int expectedSum = currentItem.getQuantity() + item.getQuantity();
+
+			if (expectedSum > item.getStockItem().getQuantity()) {
+	            log.info("Whoops. Something went wrong.");
+				return;
+			} else {
+				currentItem.setQuantity(expectedSum);
+				log.info("Added " + item.getQuantity() + " products  to "
+						+ item.getName());
+				fireTableDataChanged();
+				return;
+			}
+		}
+		
+    	if (item.getQuantity() <= item.getStockItem().getQuantity()){
+    		rows.add(item);
+            log.info("Added " + item.getName() + " quantity of " + item.getQuantity());
+            fireTableDataChanged();
+    	} else {
+            log.info("Whoops. Something went wrong.");
+    	}
     }
 
 	public void setComboListener(PurchaseItemPanel.ComboListener comboListener) {
-		// TODO Auto-generated method stub
+		this.comboListener = comboListener; 
 		
 	}
-
-	protected Object getColumnValue(int columnIndex) {
-		// TODO Auto-generated method stub
+	
+	private SoldItem getItemInstance(SoldItem item){
+		for(SoldItem soldItem : rows){
+			if(soldItem.getStockItem().getId()==item.getStockItem().getId()){
+				return soldItem;
+			}
+		}
 		return null;
 	}
+	
+	public PurchaseItemPanel.ComboListener getComboListener(){
+		return this.comboListener;
+	}
+
 }

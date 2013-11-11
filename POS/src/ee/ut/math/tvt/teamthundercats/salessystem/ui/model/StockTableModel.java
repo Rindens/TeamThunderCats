@@ -1,9 +1,5 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.model;
-
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
-
-import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
 
 import org.apache.log4j.Logger;
 

@@ -31,9 +31,10 @@ public class HistoryTableModel extends SalesSystemTableModel<Order>{
 		throw new IllegalArgumentException("Column index out of range");
 	}
 
-	public void addPurchase(Order purchase) {
-		logger.info("Creating new history row for "+purchase.toString());
-		rows.add(purchase);
+	public void addPurchase(Order order) {
+		logger.info("Creating new history row for "+order.toString());
+		rows.add(order);
+		order.refreshStock();
 		fireTableDataChanged();
 	}
 
