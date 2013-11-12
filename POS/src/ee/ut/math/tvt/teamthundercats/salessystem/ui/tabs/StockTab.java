@@ -138,7 +138,7 @@ public class StockTab {
 						StockItem currentItem = new StockItem(Long.valueOf(itemIdField.getText()), itemNameField.getText(), itemTypeField.getText(), Double.parseDouble(itemPriceField.getText()), Integer.parseInt(itemQuantityField.getText()));
 						model.getWarehouseTableModel().addItem(currentItem);
 						log.debug("Added " +itemNameField.getText() + " to warehouse");
-
+						model.addItemToWarehouse(currentItem);
 						model.getWarehouseTableModel().fireTableDataChanged();
 						//domainController.saveOrUpdate(currentItem);
 						draw();
