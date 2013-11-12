@@ -80,6 +80,18 @@
 			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
 		</java>
 	</target>
+	<target name="build" description="Build the system">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}" debug="true"
+			debuglevel="lines,vars,source" encoding="utf-8" compiler="modern"
+			target="1.7" source="1.7" includeantruntime="false">
+			<classpath refid="compile.classpath" />
+		</javac>
+
+
+
+	</target>
 
 	<target name="run">
 
@@ -95,18 +107,7 @@
 		</java>
 	</target>
 
-	<target name="build" description="Build the system">
-		<mkdir dir="${build.dir}" />
-		<mkdir dir="${build.classes.dir}" />
-		<javac srcdir="${src.dir}" destdir="${build.classes.dir}" debug="true"
-			debuglevel="lines,vars,source" encoding="utf-8" compiler="modern"
-			target="1.7" source="1.7" includeantruntime="false">
-			<classpath refid="compile.classpath" />
-		</javac>
-
-
-
-	</target>
+	
 
 	<target name="dist" description="generate the distribution">
 		<!-- Create the distribution directory -->
