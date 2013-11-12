@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.ui.tabs;
 
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.impl.SalesDomainControllerImpl;
 import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.teamthundercats.salessystem.ui.model.SalesSystemModel;
@@ -42,14 +44,17 @@ public class StockTab {
 	private SalesSystemModel model;
 	
 	private StockTableModel currentStock;
+
+	private final SalesDomainController domainController;
 	
 	
 	private JPanel tablePanel;
 	
 	private JTable tableContents;
 
-	public StockTab(SalesSystemModel model) {
+	public StockTab(SalesSystemModel model, SalesDomainController domainController) {
 		this.model = model;
+		this.domainController = domainController;
 	}
 
 	// warehouse stock tab - consists of a menu and a table
@@ -135,6 +140,7 @@ public class StockTab {
 						log.debug("Added " +itemNameField.getText() + " to warehouse");
 
 						model.getWarehouseTableModel().fireTableDataChanged();
+						//domainController.saveOrUpdate(currentItem);
 						draw();
 						addItemFrame.dispose();
 					}
@@ -156,7 +162,7 @@ public class StockTab {
 
 
 
-	// table of the wareshouse stock
+	// table of the warehouse stock
 	private Component drawStockMainPane() {
 		tablePanel = new JPanel();
 
