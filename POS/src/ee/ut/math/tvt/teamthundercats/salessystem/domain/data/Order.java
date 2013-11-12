@@ -28,7 +28,7 @@ public class Order implements Cloneable, DisplayableItem {
 	@Transient
     private List<SoldItem> items;
     
-    @Column(name = "total_price")
+    @Column(name = "TOTAL_PRICE")
     private Double sum;
     
     @Column(name = "date")
@@ -39,12 +39,6 @@ public class Order implements Cloneable, DisplayableItem {
 	
 	public static Long counter = 0L;
 
-	public Order(List<SoldItem> items){
-		this.items = items;
-		this.date = new Date();
-		this.id=counter++;
-		
-	}
 
 	public void refreshStock() {
 		
