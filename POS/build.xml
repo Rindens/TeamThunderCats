@@ -3,12 +3,13 @@
 
 	<!-- Definitions of variables used during the rest of this script -->
 
+	
 	<property file="build.properties" />
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="build.classes.dir" value="${build.dir}/classes" />
 	<property name="src.dir" value="${basedir}/src" />
 	<property name="dist.dir" value="${build.dir}/jar" />
-	<property name="conf.dir" value="${basedir}/etc" />
+	<property name="conf.dir" value="${basedir}/conf" />
 	<property name="doc.dir" value="${build.dir}/doc" />
 	<property name="test.reports.dir" value="${build.dir}/reports/" />
 	<property name="lib.dir" value="${basedir}/lib" />
@@ -38,16 +39,16 @@
 		</fileset>
 	</path>
 
+		
 	<path id="run.classpath">
-		<pathelement location="${build.classes.dir}" />
-		<!-- configuration -->
-		<pathelement location="${conf.dir}" />
+		<pathelement location="${build.classes.dir}"/>
+	    <!-- configuration -->
+	    <pathelement location="${conf.dir}"/>
 		<fileset dir="${lib.dir}">
-			<include name="*.jar" />
+			<include name="*.jar"/>
 		</fileset>
-
 		<fileset dir="${lib.hibernate.dir}">
-			<include name="*.jar" />
+			<include name="*.jar"/>
 		</fileset>
 	</path>
 
@@ -82,14 +83,9 @@
 
 	<target name="run">
 
-		<loadproperties srcFile="version.properties" />
-
-		<property name="new.build.number"
-			value="${build.major.number}.${build.minor.number}.${build.revision.number}" />
-
-		<propertyfile file="version.properties">
-			<entry key="build.number" value="${new.build.number}" />
-		</propertyfile>
+		<java classname="ee.ut.math.tvt.teamthundercats.Intro"
+					classpathref="run.classpath" fork="yes">
+				</java>
 	</target>
 
 	<target name="runc" depends="build" description="Run the application (console)">

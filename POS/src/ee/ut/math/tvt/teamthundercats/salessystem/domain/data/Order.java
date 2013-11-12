@@ -1,7 +1,6 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.domain.data;
 
 import java.util.Date;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,13 +10,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
 @Table(name = "order")
 public class Order implements Cloneable, DisplayableItem {
 	
-	@OneToMany(mappedBy = "order")
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+    private Long id;
+	
+	@OneToMany(mappedBy = "solditem")
+	@Transient
     private List<SoldItem> items;
     
     @Column(name = "total_price")
@@ -26,9 +32,7 @@ public class Order implements Cloneable, DisplayableItem {
     @Column(name = "date")
     private Date date;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    
     
 	
 	public static Long counter = 0L;
