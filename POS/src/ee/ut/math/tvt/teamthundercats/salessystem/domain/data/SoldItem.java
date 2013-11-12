@@ -30,7 +30,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	private StockItem stockItem;
 
 	@ManyToOne
-	@JoinColumn(name = "ORDER_ID", nullable = false)
+	@JoinColumn(name = "SALE_ID", nullable = false)
 	private Order order;
 	
 	@Column(name = "quantity")
@@ -39,7 +39,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	@Column(name="name")
 	private String name;
 
-	@Column(name = "price")
+	@Column(name = "ITEMprice")
 	private double price;
 
 	public SoldItem(){}
