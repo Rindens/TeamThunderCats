@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.teamthundercats.salessystem.domain.controller.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -43,7 +44,9 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		
 		// If current Order doesn't exist, we'll create one
 		if(currentOrder==null){
-			currentOrder =  new Order(items);
+			currentOrder = new Order();
+			currentOrder.setItems(items);
+			currentOrder.setDate(new Date());
 		}
 	}
 
