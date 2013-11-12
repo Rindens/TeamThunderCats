@@ -55,7 +55,6 @@ INSERT INTO STOCKITEM VALUES(2,'Banana sundae',2.3,60, NULL)
 INSERT INTO STOCKITEM VALUES(3,'A living monkey',2.1,70, NULL)
 INSERT INTO STOCKITEM VALUES(4,'Mushroom soup',2.8,56,NULL)
 INSERT INTO STOCKITEM VALUES(5,'Broccoli soup',1.7,90,NULL)
-
 INSERT INTO STOCKITEM VALUES(6,'Sausages',2.2,50,'Plate of sausages')
 INSERT INTO STOCKITEM VALUES(7,'French fries',2.6,60,'French fries with sauce')
 INSERT INTO STOCKITEM VALUES(8,'Salted beans',2.5,70,'Salted beans with bacon and leek')
