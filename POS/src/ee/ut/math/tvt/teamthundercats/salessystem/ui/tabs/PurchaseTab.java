@@ -166,7 +166,7 @@ public class PurchaseTab {
     log.info("New sale process started");
     // TODO : fire event to fill initial product selection
     try {
-      domainController.startNewPurchase();
+      domainController.startNewOrder();
       startNewSale();
     } catch (VerificationFailedException e1) {
       log.error(e1.getMessage());
@@ -226,11 +226,13 @@ protected void confirmPaymentButtonClicked() {
 	       if(tPayed>=tPrice){
 	               try {
 	                       log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-	                       domainController.submitCurrentOrder(
-	                       model.getCurrentPurchaseTableModel().getTableRows());
+	                       
+	                       domainController.submitCurrentOrder(model.getCurrentPurchaseTableModel().getTableRows());
 	                       domainController.getCurrentOrder().calculateSum();
 	                       model.getHistoryTableModel().addPurchase(domainController.getCurrentOrder());
-	                       domainController.getCurrentOrder().refreshStock();
+	                       domainController.commitCurrentOrder();
+	                       domainController.getCurrentOrder().refreshStock();	
+	                       
 	 
 	                       endSale();
 	                       model.getCurrentPurchaseTableModel().clear();

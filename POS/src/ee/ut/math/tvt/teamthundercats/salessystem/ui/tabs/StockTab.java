@@ -45,16 +45,16 @@ public class StockTab {
 	
 	private StockTableModel currentStock;
 
-	private final SalesDomainController domainController;
+	//private final SalesDomainController domainController;
 	
 	
 	private JPanel tablePanel;
 	
 	private JTable tableContents;
 
-	public StockTab(SalesSystemModel model, SalesDomainController domainController) {
+	public StockTab(SalesSystemModel model/*, SalesDomainController domainController*/) {
 		this.model = model;
-		this.domainController = domainController;
+		//this.domainController = domainController;
 	}
 
 	// warehouse stock tab - consists of a menu and a table

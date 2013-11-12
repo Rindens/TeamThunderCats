@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import ee.ut.math.tvt.teamthundercats.salessystem.domain.data.SoldItem;
+
 
 @Entity
 @Table(name = "order")
@@ -69,6 +71,7 @@ public class Order implements Cloneable, DisplayableItem {
 	public List<SoldItem> getItems() {
 		return items;
 	}
+	
 
 	public void setItems(List<SoldItem> items) {
 		this.items = items;
