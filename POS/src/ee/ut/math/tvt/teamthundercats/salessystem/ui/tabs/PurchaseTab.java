@@ -223,34 +223,34 @@ private JButton createCancelPaymentButton() {
 }
 
 protected void confirmPaymentButtonClicked() {
-      if(tPayed>=tPrice){
-              try {
-                      log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-                      domainController.submitCurrentOrder(
-                      model.getCurrentPurchaseTableModel().getTableRows());
-                      domainController.getCurrentOrder().calculateSum();
-                      model.getHistoryTableModel().addPurchase(domainController.getCurrentOrder());
-                      domainController.getCurrentOrder().refreshStock();
-
-                      endSale();
-                      model.getCurrentPurchaseTableModel().clear();
-                      try {
-                          domainController.cancelCurrentOrder();
-                  } catch (VerificationFailedException e) {
-                          // TODO Auto-generated catch block
-                          e.printStackTrace();
-                  }
-                      log.debug("Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR confirmed. Change to return: "+tChange+" EUR.");
-                      confirmOrderFrame.dispose();
-              } catch (VerificationFailedException e1) {
-                      log.error(e1.getMessage());
-              }
-      } else {
-          JOptionPane.showMessageDialog(null,
-             "Error: Not enough. Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR is not sufficient.", "Error Message",
-             JOptionPane.ERROR_MESSAGE);
-      }
-}
+	       if(tPayed>=tPrice){
+	               try {
+	                       log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
+	                       domainController.submitCurrentOrder(
+	                       model.getCurrentPurchaseTableModel().getTableRows());
+	                       domainController.getCurrentOrder().calculateSum();
+	                       model.getHistoryTableModel().addPurchase(domainController.getCurrentOrder());
+	                       domainController.getCurrentOrder().refreshStock();
+	 
+	                       endSale();
+	                       model.getCurrentPurchaseTableModel().clear();
+	                       try {
+	                           domainController.cancelCurrentOrder();
+	                   } catch (VerificationFailedException e) {
+	                           // TODO Auto-generated catch block
+	                           e.printStackTrace();
+	                   }
+	                       log.debug("Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR confirmed. Change to return: "+tChange+" EUR.");
+	                       confirmOrderFrame.dispose();
+	               } catch (VerificationFailedException e1) {
+	                       log.error(e1.getMessage());
+	               }
+	       } else {
+	           JOptionPane.showMessageDialog(null,
+	              "Error: Not enough. Total price "+tPrice+" EUR. Payment of "+tPayed+" EUR is not sufficient.", "Error Message",
+	              JOptionPane.ERROR_MESSAGE);
+	       }
+	 }
 
 protected void cancelPaymentButtonClicked() {
       try {
