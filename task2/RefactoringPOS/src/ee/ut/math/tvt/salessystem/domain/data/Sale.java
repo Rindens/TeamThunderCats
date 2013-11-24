@@ -91,5 +91,4 @@ public class Sale implements DisplayableItem {
         }
         return sum;
     }
-
 }

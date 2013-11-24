@@ -2,6 +2,8 @@ package ee.ut.math.tvt.salessystem.ui.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
 
@@ -13,6 +15,8 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 
 	private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
+	private List<Sale> saleRows;
+	
 	public PurchaseHistoryTableModel() {
 		super(new String[] { "Id", "Time", "Sum", "Client" });
 	}
@@ -30,6 +34,14 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 	        return sale.getClient();
 		}
 		throw new IllegalArgumentException("Column index out of range");
+	}
+	
+	@Override
+	public List<Sale> getTableRows() {
+		if(rows==null){
+			this.rows = new ArrayList<Sale>();
+		}
+		return rows;
 	}
 
 	@Override

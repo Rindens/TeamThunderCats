@@ -1,5 +1,8 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ee.ut.math.tvt.salessystem.domain.data.Client;
 
 /**
@@ -11,6 +14,8 @@ public class ClientTableModel extends SalesSystemTableModel<Client> {
 	public ClientTableModel() {
 		super(new String[] { "Id", "First name", "Discount"});
 	}
+	
+	private List<Client> clientRows;
 
 	@Override
 	protected Object getColumnValue(Client client, int columnIndex) {
@@ -23,6 +28,14 @@ public class ClientTableModel extends SalesSystemTableModel<Client> {
 			return client.getDiscountPercentage();
 		}
 		throw new IllegalArgumentException("Column index out of range");
+	}
+	
+	@Override
+	public List<Client> getTableRows() {
+		if(rows==null){
+			this.rows = new ArrayList<Client>();
+		}
+		return rows;
 	}
 
 	@Override

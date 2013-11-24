@@ -6,6 +6,7 @@ import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.ClientTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
+import ee.ut.math.tvt.salessystem.ui.tabs.AnyOneTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
 
@@ -18,6 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
 
@@ -30,14 +33,13 @@ public class SalesSystemUI extends JFrame {
 
 	private static final Logger log = Logger.getLogger(SalesSystemUI.class);
 
-	// Warehouse model
 	private SalesSystemModel model;
 
 	// Instances of tab classes
-	private PurchaseTab purchaseTab;
-	private HistoryTab historyTab;
-	private StockTab stockTab;
-	private ClientTab clientTab;
+	private AnyOneTab historyTab;
+	private AnyOneTab stockTab;
+	private AnyOneTab purchaseTab;
+	private AnyOneTab clientTab;
 	private SalesDomainController domainController;
 
 	public static final String WAREHOUSE = "Warehouse";
@@ -54,11 +56,12 @@ public class SalesSystemUI extends JFrame {
 		this.model = new SalesSystemModel(domainController);
 		domainController.setModel(model);
 
-		// Create singleton instances of the tab classes
-		historyTab = new HistoryTab(model);
-		stockTab = new StockTab(model, domainController);
-		purchaseTab = new PurchaseTab(domainController, model, this);
-		clientTab = new ClientTab(model);
+		// instances of the tab classes
+		historyTab = new HistoryTab(model, HISTORY);
+		stockTab = new StockTab(model, domainController, WAREHOUSE);
+		clientTab = new ClientTab(model, CLIENTS);
+		purchaseTab = new PurchaseTab(domainController, model, this, POINTOFSALE);
+
 
 		setTitle("Sales system");
 
@@ -87,18 +90,33 @@ public class SalesSystemUI extends JFrame {
 			}
 		});
 	}
+	
+	private void addTab(JTabbedPane pane, AnyOneTab aTab){
+
+		pane.add(aTab.getName(), aTab.draw());
+		aTab.setName(aTab.getName());
+
+	}
 
 	private void drawWidgets() {
-		JTabbedPane tabbedPane = new JTabbedPane();
+		final JTabbedPane tabbedPane = new JTabbedPane();
 
-		tabbedPane.add("Point-of-sale", purchaseTab.draw());
-		tabbedPane.add("Warehouse", stockTab.draw());
-		tabbedPane.add("History", historyTab.draw());
-		tabbedPane.add("Clients", clientTab.draw());
+		addTab(tabbedPane, purchaseTab);
+		addTab(tabbedPane, stockTab);
+		addTab(tabbedPane, historyTab);
+		addTab(tabbedPane, clientTab);
+
+		tabbedPane.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				domainController.refresh(tabbedPane.getSelectedComponent().getName());
+			}
+		});
 
 		getContentPane().add(tabbedPane);
 	}
 
+
+
 }
-
-
