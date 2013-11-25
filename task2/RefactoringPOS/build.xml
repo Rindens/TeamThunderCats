@@ -37,6 +37,7 @@
     <path id="run.classpath">
         <pathelement location="${build.classes.dir}"/>
         <!-- configuration -->
+        <pathelement location="${src.dir}"/>
         <pathelement location="${conf.dir}"/>
         <fileset dir="${lib.dir}">
             <include name="*.jar"/>

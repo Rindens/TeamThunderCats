@@ -12,13 +12,16 @@ import javax.swing.JTable;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 
-public class ClientTab {
+public class ClientTab extends AnyOneTab {
     
     private SalesSystemModel model;
     
-    public ClientTab(SalesSystemModel model) {
+    public ClientTab(SalesSystemModel model, String name) {
+    	super(name);
         this.model = model;
     } 
+    
+    private Component component;
     
     /**
      * The main entry-point method. Creates the tab.
@@ -31,7 +34,8 @@ public class ClientTab {
         
         panel.setLayout(gb);
         panel.add(drawClientsTable(), gc);
-
+        
+        this.component = panel;
         return panel;
     }
 

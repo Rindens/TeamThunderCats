@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
@@ -11,12 +13,14 @@ import ee.ut.math.tvt.salessystem.domain.data.StockItem;
  */
 public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	private static final long serialVersionUID = 1L;
-
+	
 	private static final Logger log = Logger.getLogger(StockTableModel.class);
 
 	public StockTableModel() {
 		super(new String[] {"Id", "Name", "Price", "Quantity"});
 	}
+	
+	private List<StockItem> stockRows;
 
 	@Override
 	protected Object getColumnValue(StockItem item, int columnIndex) {
@@ -46,7 +50,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 					+ " increased quantity by " + stockItem.getQuantity());
 		}
 		catch (NoSuchElementException e) {
-			rows.add(stockItem);
+			stockRows.add(stockItem);
 			log.debug("Added " + stockItem.getName()
 					+ " quantity of " + stockItem.getQuantity());
 		}
@@ -56,7 +60,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	
 	
 	public boolean hasEnoughInStock(StockItem item, int quantity) {
-	    for(StockItem i : this.rows) {
+	    for(StockItem i : this.stockRows) {
 	        if (i.getId().equals(item.getId())) {
 	            return (i.getQuantity() >= quantity);
 	        }
@@ -65,7 +69,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	}
 	
 	public boolean validateNameUniqueness(String newName) {
-	    for (StockItem item : rows) {
+	    for (StockItem item : stockRows) {
 	        log.debug(" === Comparing: " + newName + " vs. " + item.getName());
 	        
 	        if (newName.equals(item.getName())) {
@@ -84,7 +88,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 			buffer.append(headers[i] + "\t");
 		buffer.append("\n");
 
-		for (final StockItem stockItem : rows) {
+		for (final StockItem stockItem : stockRows) {
 			buffer.append(stockItem.getId() + "\t");
 			buffer.append(stockItem.getName() + "\t");
 			buffer.append(stockItem.getPrice() + "\t");
@@ -93,6 +97,14 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		}
 
 		return buffer.toString();
+	}
+
+	@Override
+	public List<StockItem> getTableRows() {
+		if(stockRows==null){
+			this.stockRows = new ArrayList<StockItem>();
+		}
+		return stockRows;
 	}
 
 }

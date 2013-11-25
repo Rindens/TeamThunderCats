@@ -2,10 +2,12 @@ package ee.ut.math.tvt.salessystem.ui.tabs;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.Client;
+import ee.ut.math.tvt.salessystem.domain.data.Sale;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.panels.PurchaseItemPanel;
 import ee.ut.math.tvt.salessystem.ui.windows.PayingWindow;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -13,21 +15,25 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import org.apache.log4j.Logger;
 
 /**
  * Encapsulates everything that has to do with the purchase tab (the tab
  * labelled "Point-of-sale" in the menu).
  */
-public class PurchaseTab {
+public class PurchaseTab extends AnyOneTab {
 
     private static final Logger log = Logger.getLogger(PurchaseTab.class);
+    
+    private Component component;
 
     private final SalesDomainController domainController;
 
@@ -44,7 +50,8 @@ public class PurchaseTab {
     private JFrame parent;
 
     public PurchaseTab(SalesDomainController controller, SalesSystemModel model,
-            JFrame parent) {
+            JFrame parent, String name) {
+    	super(name);
         this.domainController = controller;
         this.model = model;
         this.parent = parent;
@@ -67,7 +74,8 @@ public class PurchaseTab {
         // Add the main purchase-panel
         purchasePane = new PurchaseItemPanel(model);
         panel.add(purchasePane, getConstraintsForPurchasePanel());
-
+        
+        this.component = panel;
         return panel;
     }
 
@@ -138,15 +146,15 @@ public class PurchaseTab {
 
     /** Event handler for the <code>new purchase</code> event. */
     protected void newPurchaseButtonClicked() {
+        Sale sale =  new Sale(model.getSelectedClient());
         log.info("New sale process started");
-        domainController.startNewPurchase();
         startNewSale();
+        model.getCurrentPurchaseTableModel().setCurrentSale(sale);
     }
 
     /** Event handler for the <code>cancel purchase</code> event. */
     protected void cancelPurchaseButtonClicked() {
         log.info("Sale cancelled");
-        domainController.cancelCurrentPurchase();
         endSale();
         model.getCurrentPurchaseTableModel().clear();
 
@@ -162,12 +170,10 @@ public class PurchaseTab {
     public void endPurchaseAfterPaying() {
         log.info("Sale complete");
         try {
-
+            Sale sale = model.getCurrentPurchaseTableModel().getCurrentSale();
             log.debug("Contents of the current basket:\n"
                     + model.getCurrentPurchaseTableModel());
-            domainController.submitCurrentPurchase(
-                    model.getCurrentPurchaseTableModel().getTableRows(),
-                    model.getSelectedClient());
+            domainController.registerSale(sale);
             endSale();
             model.getCurrentPurchaseTableModel().clear();
         } catch (VerificationFailedException e1) {

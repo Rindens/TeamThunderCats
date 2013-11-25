@@ -137,10 +137,10 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 * Replace the current contents of the table with the SoldItems of the given Sale.
 	 * (Used by the history details table in the HistoryTab).
 	 */
-	public void showSale(Sale currentSale) {
-		this.rows = new ArrayList<SoldItem>(currentSale.getSoldItems());
-		fireTableDataChanged();
-	}
+	public void showSale(Sale sale) {
+        this.currentSale = sale;
+        fireTableDataChanged();
+    }
 
 	@Override
 	public List<SoldItem> getTableRows() {

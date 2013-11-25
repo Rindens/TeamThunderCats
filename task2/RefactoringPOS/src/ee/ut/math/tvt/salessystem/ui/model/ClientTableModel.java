@@ -32,10 +32,10 @@ public class ClientTableModel extends SalesSystemTableModel<Client> {
 	
 	@Override
 	public List<Client> getTableRows() {
-		if(rows==null){
-			this.rows = new ArrayList<Client>();
+		if(clientRows==null){
+			this.clientRows = new ArrayList<Client>();
 		}
-		return rows;
+		return clientRows;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ClientTableModel extends SalesSystemTableModel<Client> {
 			buffer.append(headers[i] + "\t");
 		buffer.append("\n");
 
-		for (final Client client : rows) {
+		for (final Client client : clientRows) {
 			buffer.append(client.getId() + "\t");
 			buffer.append(client.getFirstName() + "\t");
 			buffer.append(client.getDiscountPercentage() + "\t");

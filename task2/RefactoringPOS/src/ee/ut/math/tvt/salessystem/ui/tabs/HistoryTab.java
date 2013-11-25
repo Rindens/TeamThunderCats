@@ -19,13 +19,16 @@ import javax.swing.event.ListSelectionListener;
  * Encapsulates everything that has to do with the purchase tab (the tab
  * labelled "History" in the menu).
  */
-public class HistoryTab {
+public class HistoryTab extends AnyOneTab {
 
     private SalesSystemModel model;
 
     private PurchaseInfoTableModel historyDetailsTableModel;
+    
+    private Component component; 
 
-    public HistoryTab(SalesSystemModel model) {
+    public HistoryTab(SalesSystemModel model, String name) {
+    	super(name);
         this.model = model;
     }
 
@@ -41,7 +44,8 @@ public class HistoryTab {
         panel.setLayout(gb);
         panel.add(drawHistoryGeneralTable(), gc);
         panel.add(drawHistoryDetailsTable(), gc);
-
+        
+        this.component = panel;
         return panel;
     }
 

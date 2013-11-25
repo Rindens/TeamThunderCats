@@ -92,10 +92,8 @@ public class SalesSystemUI extends JFrame {
 	}
 	
 	private void addTab(JTabbedPane pane, AnyOneTab aTab){
-
 		pane.add(aTab.getName(), aTab.draw());
 		aTab.setName(aTab.getName());
-
 	}
 
 	private void drawWidgets() {

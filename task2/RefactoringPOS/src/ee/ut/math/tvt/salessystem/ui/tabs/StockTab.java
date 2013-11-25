@@ -20,16 +20,19 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 import org.apache.log4j.Logger;
 
-public class StockTab {
+public class StockTab extends AnyOneTab {
 
     private static final Logger log = Logger.getLogger(StockTab.class);
     private final SalesDomainController controller;
+    
+    private Component component;
 
     private SalesSystemModel model;
 
     private JButton addItem;
 
-    public StockTab(SalesSystemModel model, SalesDomainController controller) {
+    public StockTab(SalesSystemModel model, SalesDomainController controller, String name) {
+    	super(name);
         this.model = model;
         this.controller = controller;
     }
@@ -54,6 +57,8 @@ public class StockTab {
         gc.weighty = 1.0;
         gc.fill = GridBagConstraints.BOTH;
         panel.add(drawStockMainPane(), gc);
+        
+        this.component = panel;
         return panel;
     }
 

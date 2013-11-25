@@ -38,10 +38,10 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 	
 	@Override
 	public List<Sale> getTableRows() {
-		if(rows==null){
-			this.rows = new ArrayList<Sale>();
+		if(saleRows==null){
+			this.saleRows = new ArrayList<Sale>();
 		}
-		return rows;
+		return saleRows;
 	}
 
 	@Override
@@ -52,9 +52,9 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 			buffer.append(headers[i] + "\t");
 		buffer.append("\n");
 
-		for (final Sale sale : rows) {
+		for (final Sale sale : saleRows) {
 			buffer.append(sale.getId() + "\t");
-			//buffer.append(sale.getClient() != null ? sale.getClient().getFirstName() : "" + "\t");
+			buffer.append(sale.getClient() != null ? sale.getClient().getFirstName() : "" + "\t");
 			buffer.append(sale.getSum() + "\t");
 			buffer.append("\n");
 		}
