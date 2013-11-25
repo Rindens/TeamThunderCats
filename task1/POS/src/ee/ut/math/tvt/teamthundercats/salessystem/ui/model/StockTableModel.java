@@ -18,7 +18,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	}
 
 	@Override
-	protected Object getColumnValue(StockItem item, int columnIndex) {
+	public Object getColumnValue(StockItem item, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
 			return item.getId();
