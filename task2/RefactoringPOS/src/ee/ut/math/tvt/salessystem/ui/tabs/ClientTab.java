@@ -21,7 +21,8 @@ public class ClientTab extends AnyOneTab {
         this.model = model;
     } 
     
-    private Component component;
+    @SuppressWarnings("unused")
+	private Component component;
     
     /**
      * The main entry-point method. Creates the tab.

@@ -3,9 +3,11 @@ package ee.ut.math.tvt.salessystem.ui.tabs;
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
 import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,7 +27,8 @@ public class HistoryTab extends AnyOneTab {
 
     private PurchaseInfoTableModel historyDetailsTableModel;
     
-    private Component component; 
+    @SuppressWarnings("unused")
+	private Component component; 
 
     public HistoryTab(SalesSystemModel model, String name) {
     	super(name);

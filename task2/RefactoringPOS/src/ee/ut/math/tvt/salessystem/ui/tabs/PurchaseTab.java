@@ -33,7 +33,8 @@ public class PurchaseTab extends AnyOneTab {
 
     private static final Logger log = Logger.getLogger(PurchaseTab.class);
     
-    private Component component;
+    @SuppressWarnings("unused")
+	private Component component;
 
     private final SalesDomainController domainController;
 
